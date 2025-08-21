@@ -19,7 +19,7 @@ export default function History(){
       <label className="text-purple-300">₹400</label>
       </div>
        <div className="flex justify-between border-1  p-5 border-t-black/30 border-t-black/30">
-      <div className="text-xl text-orange-300">messho</div>
+      <div className="text-xl text-orange-300">Messho</div>
       <label className="text-purple-300">₹400</label>
       </div>
        <div className="flex justify-between border-1  p-5 border-t-black/30 border-t-black/30">
