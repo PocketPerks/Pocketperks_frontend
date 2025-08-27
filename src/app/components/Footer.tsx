@@ -10,7 +10,7 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">About Us</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Press</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Testimonials</a></li>
+              <li><a href="/profile/Review" className="text-gray-300 hover:text-white transition-colors">Testimonials</a></li>
             </ul>
           </div>
 
@@ -19,7 +19,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold text-orange-400 mb-4">Useful Reads</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms and Conditions</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy & Cookie Policy</a></li>
+              <li><a href="/profile/PrivacyPolicy" className="text-gray-300 hover:text-white transition-colors">Privacy & Cookie Policy</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Anti-Spam Policy</a></li>
             </ul>
           </div>
@@ -28,7 +28,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-orange-400 mb-4">Special Pages</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Refer and Earn</a></li>
+              <li><a href="/profile/ReferalEarn" className="text-gray-300 hover:text-white transition-colors">Refer and Earn</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Become our Partner</a></li>
             </ul>
@@ -38,8 +38,8 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-orange-400 mb-4">Connect With Us</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+              <li><a href="/profile/help" className="text-gray-300 hover:text-white transition-colors">Help</a></li>
+              <li><a href="/components/Contectus" className="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
             </ul>
             
             {/* Social Links */}
