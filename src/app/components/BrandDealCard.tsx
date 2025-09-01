@@ -2,17 +2,19 @@ import React from 'react';
 
 interface BrandDealCardProps {
   href: string;
-  brandName: string;
-  logo?: React.ReactNode; // can be emoji or svg
-  offerText: string; // e.g., 50-90% Off
-  subText: string; // e.g., Across Categories
-  cashbackText: string; // e.g., Up to 7% Cashback
-  bgClass?: string; // background color/gradient classes
+  brandName: string;     // bank name
+  cardName?: string;     // credit card name
+  logo?: React.ReactNode; // emoji ya backend se image
+  offerText: string;     // Cashback / discount text
+  subText: string;       // joining offer
+  cashbackText: string;  // benefits
+  bgClass?: string;      // gradient bg
 }
 
 const BrandDealCard: React.FC<BrandDealCardProps> = ({
   href,
   brandName,
+  cardName,
   logo,
   offerText,
   subText,
@@ -22,40 +24,38 @@ const BrandDealCard: React.FC<BrandDealCardProps> = ({
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group block rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-      aria-label={`${brandName} offer`}
+      aria-label={`${brandName} ${cardName} offer`}
     >
-      <div className={`relative h-56 md:h-60 bg-gradient-to-br ${bgClass} text-white`}>        
-        {/* Left content */}
-        <div className="relative z-10 h-full flex">
-          <div className="flex-1 p-5 md:p-6 flex flex-col justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-md bg-white/90 text-gray-900 flex items-center justify-center text-xl shadow-sm">
-                {logo ?? <span>🏷️</span>}
-              </div>
-              <span className="text-white/90 font-semibold tracking-wide">{brandName}</span>
+      <div className={`relative h-64 bg-gradient-to-br ${bgClass} text-white`}>
+        <div className="relative z-10 h-full flex flex-col justify-between p-6">
+          
+          {/* Logo + bank name */}
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-md bg-white/90 text-gray-900 flex items-center justify-center text-xl shadow-sm overflow-hidden">
+              {logo ?? <span>🏦</span>}
             </div>
-
-            <div>
-              <h3 className="text-2xl md:text-3xl font-extrabold leading-snug">{offerText}</h3>
-              <p className="text-white/90 text-sm mt-1">{subText}</p>
-            </div>
-
-            {/* CK badge */}
-            <div className="flex items-center gap-2 w-fit bg-white/95 text-gray-900 px-3 py-1.5 rounded-md shadow">
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-blue-600 text-white text-xs font-bold">CK</span>
-              <span className="text-xs font-semibold">{cashbackText}</span>
+            <div className="flex flex-col">
+              <span className="text-white/90 font-semibold tracking-wide">
+                {brandName}
+              </span>
+              {cardName && (
+                <span className="text-sm text-white/70">{cardName}</span>
+              )}
             </div>
           </div>
 
-          {/* Right visual placeholder */}
-          <div className="relative w-40 md:w-48 flex items-end justify-center pr-4 pb-4">
-            <div className="relative w-full h-40 md:h-44">
-              {/* Placeholder product block */}
-              <div className="absolute bottom-0 right-0 w-28 h-28 rounded-lg bg-white/90 shadow-lg" />
-              <div className="absolute -top-2 right-10 w-16 h-16 rounded-full bg-white/30" />
-              <div className="absolute top-6 right-0 w-10 h-10 rounded-md bg-white/20" />
-            </div>
+          {/* Offer Details */}
+          <div>
+            <h3 className="text-2xl font-extrabold leading-snug">{offerText}</h3>
+            {subText && <p className="text-white/90 text-sm mt-1">{subText}</p>}
+          </div>
+
+          {/* Benefits badge */}
+          <div className="w-full bg-white/95 text-gray-900 px-4 py-2 rounded-md shadow text-sm font-medium">
+            {cashbackText}
           </div>
         </div>
 
