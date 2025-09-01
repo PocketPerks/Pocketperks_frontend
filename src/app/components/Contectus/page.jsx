@@ -1,197 +1,118 @@
-'use client'
-import React from "react";
-import styled from "styled-components";
+"use client";
 
-const Container = styled.div`
-  padding: 20px 40px;
-  font-family: Arial, sans-serif;
-`;
+import { useState } from "react";
 
-const Breadcrumb = styled.div`
-  font-size: 14px;
-  margin-bottom: 20px;
-  .active {
-    font-weight: bold;
-  }
-`;
+export default function ContactUs() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    file: null,
+    captcha: "",
+  });
 
-const Wrapper = styled.div`
-  display: flex;
-  gap: 30px;
-`;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-const FormSection = styled.div`
-  flex: 2;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  h2 {
-    margin-bottom: 5px;
-  }
-  p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-  }
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-  input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  min-height: 100px;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const FileUpload = styled.div`
-  margin-bottom: 15px;
-  .file-btn {
-    display: inline-block;
-    background: #007bff;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    input {
-      display: none;
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({
+        ...formData,
+        file: e.target.files[0],
+      });
     }
-  }
-  .file-info {
-    display: block;
-    font-size: 12px;
-    margin-top: 5px;
-    color: #666;
-  }
-`;
+  };
 
-const Captcha = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  .captcha-img {
-    padding: 8px 14px;
-    background: #f1f1f1;
-    font-weight: bold;
-    font-size: 18px;
-  }
-  input {
-    flex: 1;
-    padding: 10px;
-  }
-`;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted Data:", formData);
+    alert("Form Submitted ✅");
+  };
 
-const SubmitBtn = styled.button`
-  padding: 10px 20px;
-  background: #9995c1;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const SideSection = styled.div`
-  flex: 1;
-`;
-
-const OfferCard = styled.div`
-  background: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 20px;
-  img {
-    max-width: 100%;
-    border-radius: 6px;
-    margin-bottom: 10px;
-  }
-`;
-
-const StepsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  li {
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-`;
-
-const ContactUs = () => {
   return (
-    <Container>
-      {/* Breadcrumb */}
-      <Breadcrumb>
-        <span>Home</span> / <span className="active">Contact Us</span>
-      </Breadcrumb>
+    <div className="max-w-2xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-2">Say Hello!</h2>
+      <p className="text-gray-600 mb-6">
+        Please elaborate your concern in the below. Our support team will endeavour
+        to get back to you within 48 hours
+      </p>
 
-      <Wrapper>
-        {/* Left Side Form */}
-        <FormSection>
-          <h2>Say Hello!</h2>
-          <p>
-            Please elaborate your concern in the below, Our support team will endeavour to get back to you within 48 hours
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Name & Email */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full name"
+            value={formData.name}
+            onChange={handleChange}
+            className="border rounded-lg p-3 w-full"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            value={formData.email}
+            onChange={handleChange}
+            className="border rounded-lg p-3 w-full"
+            required
+          />
+        </div>
+
+        {/* Message */}
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          className="border rounded-lg p-3 w-full h-28"
+          required
+        />
+
+        {/* File Upload */}
+        <div>
+          <label className="block font-medium mb-2">Upload File</label>
+          <input
+            type="file"
+            accept=".jpg,.jpeg,.png,.pdf"
+            onChange={handleFileChange}
+            className="border rounded-lg p-2 w-full"
+          />
+          <p className="text-sm text-gray-500">
+            Allowed file types: .jpg, .jpeg, .png, .pdf | Max size: 2MB
           </p>
+        </div>
 
-          <form>
-            <FormGroup>
-              <input type="text" placeholder="Full name" />
-              <input type="email" placeholder="Email address" />
-            </FormGroup>
+        {/* Captcha */}
+        <div className="flex items-center gap-4">
+          <div className="bg-gray-200 px-4 py-2 font-bold text-lg rounded">
+            5HrT0
+          </div>
+          <input
+            type="text"
+            name="captcha"
+            placeholder="Enter Captcha"
+            value={formData.captcha}
+            onChange={handleChange}
+            className="border rounded-lg p-2 w-full"
+            required
+          />
+        </div>
 
-            <TextArea placeholder="Your Message" />
-
-            <FileUpload>
-              <label className="file-btn">
-                Choose File
-                <input type="file" accept=".jpg,.jpeg,.png,.pdf" />
-              </label>
-              <span className="file-info">
-                Allowed file types: .jpg, .pdf, .png, .jpeg | Max size: 2MB
-              </span>
-            </FileUpload>
-
-            <Captcha>
-              <div className="captcha-img">g49Ou</div>
-              <input type="text" placeholder="Enter captcha" />
-            </Captcha>
-
-            <SubmitBtn type="submit">Submit</SubmitBtn>
-          </form>
-        </FormSection>
-
-        {/* Right Side Info */}
-        <SideSection>
-          <OfferCard>
-            <h4>Pick of the Day</h4>
-            <img src="https://via.placeholder.com/250x120" alt="offer" />
-            <p>Find Best Deals on Vijay Sales ...</p>
-          </OfferCard>
-
-          <h4>How CashKaro Works?</h4>
-          <StepsList>
-            <li>Visit CashKaro app first before you shop online</li>
-            <li>Select the brand you want to shop on</li>
-            <li>Shop & pay as usual on the site</li>
-            <li>Get Cashback on your order</li>
-            <li>Transfer your Cashback to your Bank or Wallet</li>
-          </StepsList>
-        </SideSection>
-      </Wrapper>
-    </Container>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
-};
-
-export default ContactUs;
+}

@@ -1,213 +1,171 @@
+"use client";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import {motion} from 'framer-motion'
 
 const Page = () => {
+  const carouselItems = [
+    <div className="bg-white p-1 h-auto w-full max-w-sm rounded-2xl shadow-md flex flex-col items-center justify-center">
+      <img
+        src="product.png"
+        alt="Item 1"
+        className=" w-full h-[15rem] rounded-xl object-cover"
+      />
+    </div>,
+    <div className="bg-white p-1 h-auto w-full max-w-sm rounded-2xl shadow-md flex flex-col items-center justify-center">
+      <img
+        src="https://i.ibb.co/4F2yR9y/phone.png"
+        alt="Item 2"
+        className="w-full h-[15rem] rounded-xl object-cover"
+      />
+    </div>,
+    <div className="bg-white p-1 h-auto w-full max-w-sm rounded-2xl shadow-md flex flex-col items-center justify-center">
+      <img
+        src="https://i.ibb.co/ysx4GdQ/fashion.png"
+        alt="Item 3"
+        className="w-full h-[15rem] rounded-xl object-cover"
+      />
+    </div>,
+  ];
+
+
   return (
-    <div style={{ fontFamily: "'Poppins', sans-serif", background: "#fff", minHeight: "100vh", padding: "20px" }}>
-      {/* Header */}
-      <header style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: 20 }}>
-        <div style={{ fontWeight: "bold", fontSize: 20, color: "#FF6600" }}>
-          CASH<span style={{ color: "#0059ff" }}>KARO</span>
-        </div>
-        <input
-          type="text"
-          placeholder="Search for any brand or product"
-          style={{
-            flex: 1,
-            padding: "8px 12px",
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            fontSize: 14,
-          }}
-        />
-      </header>
-
-      {/* Main Content Wrapper */}
-      <div style={{ maxWidth: 900, margin: "auto", display: "flex", gap: 20, flexWrap: "wrap" }}>
-        {/* Left side - Slider */}
-        <div
-          style={{
-            flex: "1 1 400px",
-            background: "#000",
-            color: "#fff",
-            borderRadius: 8,
-            padding: 20,
-            minHeight: 220,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
-          <div style={{ fontSize: 14, marginBottom: 8 }}>Remember to</div>
-          <div style={{ fontWeight: "bold", fontSize: 22 }}>
-            Empty your <br />
-            Amazon cart, &gt;&gt;
+    <>
+    <div className="font-[Poppins] bg-gradient-to-br from-[#f9fafc] via-[#fdfdfd] to-[#f1f5f9] min-h-screen">
+     <Navbar/>
+      {/* 🔹 Hero Banner */}
+      <section className="relative bg-gray-800 text-white rounded-3xl h-[34rem] max-w-6xl mx-auto shadow-lg p-10">
+        <div>
+           <div className="flex flex-col absolute left-0 md:left-[40rem] w-full max-w-md gap-4">
+            <motion.div initial={{x:100 , opacity:0}} viewport={{once:true}} whileInView={{x:0 , opacity:1}}  transition={{type:'spring' , stiffness:20,staggerChildren:0.2}} className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-[#00129b]">72h</div>
+              <div className="text-xs font-semibold absolute text-black">Rewards Track In</div>
+            </motion.div>
+            <motion.div initial={{x:100 , opacity:0}} viewport={{once:true}} whileInView={{x:0 , opacity:1}}  transition={{type:'spring' , stiffness:20,staggerChildren:0.5}} className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-[#00129b]">30d</div>
+              <div className="text-xs font-semibold text-black mt-1">Rewards Confirm In</div>
+            </motion.div>
+            <motion.div initial={{x:100 , opacity:0}} viewport={{once:true}} whileInView={{x:0 , opacity:1}}  transition={{type:'spring' , stiffness:20,staggerChildren:0.5}} className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-green-600">✅ YES</div>
+              <div className="text-xs font-semibold text-black mt-1">App Orders Eligible</div>
+            </motion.div>
           </div>
-          <div style={{ fontSize: 12, marginTop: 4 }}>Wishlist & Save for later section</div>
-
-          {/* Image */}
-          <img
-            src="https://i.ibb.co/6vMH27D/amazon-laptop.png"
-            alt="Amazon laptop"
-            style={{ position: "absolute", right: 20, bottom: 20, width: 150, height: "auto" }}
+          <p className="text-sm mb-2 opacity-80">⚡ Reminder</p>
+          <h1 className="font-extrabold text-4xl leading-snug">
+            Clear your Amazon Cart <br /> Before Shopping →
+          </h1>
+          <p className="text-sm mt-3 opacity-80">
+            Wishlist & Save for later section bhi clear kar lo!
+          </p>
+        </div>
+        <div>
+        {/* 🔹 Alice Carousel Added */}
+        <div className="mt-10 w-full max-w-md">
+          <AliceCarousel
+            mouseTracking
+            items={carouselItems}
+            autoPlay
+            autoPlayInterval={3000}
+            infinite
+            disableDotsControls={true}
+            disableButtonsControls={true}
           />
-
-          {/* Slider indicators */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 12,
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              gap: 6,
-            }}
-          >
-            <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "#555" }}></div>
-            <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "#aaa" }}></div>
-            <div style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "#fff" }}></div>
-            <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "#555" }}></div>
-          </div>
         </div>
 
-        {/* Right side - Amazon Promo Card */}
-        <div
-          style={{
-            flex: "1 1 260px",
-            border: "1px solid #e0e7ff",
-            borderRadius: 8,
-            padding: 16,
-            fontSize: 12,
-            color: "#444",
-          }}
-        >
-          {/* Amazon logo + rating */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+       
+          </div>
+      </section>
+
+      {/* 🔹 Content Grid */}
+      <div className="max-w-6xl mx-auto mt-18 grid md:grid-cols-3 gap-8">
+        {/* Amazon Promo Card */}
+        <motion.div initial={{x:-100 , opacity:0}} viewport={{once:true}} whileInView={{x:0 , opacity:1}} transition={{type:'spring' , stiffness:20}} className="col-span-1 bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition">
+          <div className="flex justify-between items-center mb-4">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
               alt="Amazon logo"
-              style={{ height: 24 }}
+              className="h-7"
             />
-            <div style={{ fontSize: 11, color: "#888" }}>
-              4.8 of 5 | 1875 Ratings
+            <span className="text-xs text-gray-500">⭐ 4.8 | 1875 Ratings</span>
+          </div>
+          <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+            Amazon India’s largest marketplace, offering electronics, fashion,
+            beauty & more at the best prices.
+          </p>
+          <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl p-5 font-bold text-gray-800 mb-5">
+            Upto <span className="text-[#FF6600]">4%</span> Cashback <br />
+            + <span className="text-[#0059ff]">5% Rewards</span> <br />
+            on Fashion, Mobiles & More
+          </div>
+          <a
+            href="#"
+            className="block w-full text-center bg-[#FF6600] text-white py-3 rounded-xl font-semibold hover:bg-orange-600 transition"
+          >
+            🎁 Claim Rewards on Amazon →
+          </a>
+        </motion.div>
+
+        {/* Side Info */}
+        <div className="col-span-2 flex flex-col gap-6">
+          {/* Top Amazon Offers */}
+          <motion.div initial={{x:100 , opacity:0}} viewport={{once:true}} whileInView={{x:0 , opacity:1}}  transition={{type:'spring' , stiffness:20,staggerChildren:0.5}} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md">
+            <h3 className="font-bold text-lg text-gray-800">🔥 Top Amazon Offers</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Get up to 80% Off + Extra 5% CashKaro Rewards on Fashion,
+              Electronics, Home, Beauty & more.
+            </p>
+            <a
+              href="#"
+              className="inline-block mt-2 text-[#0059ff] text-sm font-medium hover:underline"
+            >
+              See Offer Details →
+            </a>
+          </motion.div>
+
+          {/* Timelines */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-[#00129b]">72h</div>
+              <div className="text-xs font-semibold mt-1">Rewards Track In</div>
+            </div>
+            <div className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-[#00129b]">30d</div>
+              <div className="text-xs font-semibold mt-1">Rewards Confirm In</div>
+            </div>
+            <div className="bg-white border rounded-2xl p-5 shadow hover:shadow-md transition">
+              <div className="text-2xl font-extrabold text-green-600">✅ YES</div>
+              <div className="text-xs font-semibold mt-1">App Orders Eligible</div>
             </div>
           </div>
 
-          <p style={{ fontSize: 11, color: "#666", marginBottom: 16 }}>
-            Amazon Promo Codes <br />
-            Amazon, India's largest online marketplace, offers everything you need...
-          </p>
-
-          {/* Rewards section */}
-          <div
-            style={{
-              background: "#f8faff",
-              borderRadius: 6,
-              padding: 12,
-              fontWeight: "bold",
-              fontSize: 13,
-              color: "#222",
-              marginBottom: 12,
-            }}
-          >
-            Upto <span style={{ fontWeight: "900" }}>4%</span> <br />
-            <span style={{ color: "#0059ff" }}>5% Rewards</span>
-            <br />
-            on Fashion, Mobiles, Beauty and more
+          {/* Terms */}
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md">
+            <h3 className="font-bold text-lg">📜 Important Terms</h3>
+            <ul className="mt-3 list-disc pl-6 text-sm text-gray-600 space-y-2">
+              <li>
+                Do not add items in Cart/Wishlist before visiting via CashKaro.
+              </li>
+              <li>Seller/Merchant/Affiliate accounts not eligible.</li>
+              <li>GST/Business users not eligible for mobile rewards.</li>
+              <li>
+                Rewards calculated on final amount (excluding GST/charges).
+              </li>
+            </ul>
+            <a
+              href="#"
+              className="inline-block mt-3 text-[#0059ff] text-sm font-medium hover:underline"
+            >
+              View All Terms →
+            </a>
           </div>
-
-          <a
-            href="#"
-            style={{
-              display: "inline-block",
-              background: "#FF6600",
-              color: "white",
-              textAlign: "center",
-              borderRadius: 4,
-              padding: "8px 16px",
-              fontWeight: "bold",
-              fontSize: 13,
-              textDecoration: "none",
-            }}
-          >
-            Earn Rewards on Amazon &rarr;
-          </a>
         </div>
       </div>
-
-      {/* Below content - offers, timelines, terms */}
-      <div style={{ maxWidth: 900, margin: "40px auto 20px", fontSize: 12, color: "#333" }}>
-        {/* Top Amazon Offers */}
-        <section
-          style={{
-            border: "1px solid #e0e7ff",
-            borderRadius: 8,
-            padding: 16,
-            marginBottom: 20,
-          }}
-        >
-          <b>Top Amazon Offers</b>
-          <p style={{ marginTop: 8, fontSize: 11 }}>
-            Up to 80% Off Across Categories + Upto 5% CashKaro Rewards on Home, Fashion, Mobiles, Beauty & more
-          </p>
-          <a href="#" style={{ color: "#0059ff", fontSize: 11, textDecoration: "none" }}>
-            See Offer Details &rarr;
-          </a>
-        </section>
-
-        {/* Important Timelines */}
-        <section
-          style={{
-            border: "1px solid #e0e7ff",
-            borderRadius: 8,
-            padding: 16,
-            marginBottom: 20,
-            display: "flex",
-            justifyContent: "space-around",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ flex: 1, padding: 8 }}>
-            <div style={{ fontWeight: "bold", fontSize: 24, color: "#00129b" }}>72</div>
-            <div style={{ fontWeight: "bold", fontSize: 9 }}>Hours of Shipmen</div>
-            <div style={{ fontSize: 10, color: "#555" }}>Rewards track in</div>
-          </div>
-
-          <div style={{ flex: 1, padding: 8 }}>
-            <div style={{ fontWeight: "bold", fontSize: 24, color: "#00129b" }}>30</div>
-            <div style={{ fontWeight: "bold", fontSize: 9 }}>Days</div>
-            <div style={{ fontSize: 10, color: "#555" }}>Rewards confirm in</div>
-          </div>
-
-          <div style={{ flex: 1, padding: 8 }}>
-            <div style={{ fontWeight: "bold", fontSize: 24, color: "#00129b" }}>YES</div>
-            <div style={{ fontWeight: "bold", fontSize: 9 }}>Rewards on Amazon app orders?</div>
-          </div>
-        </section>
-
-        {/* Important Terms & Conditions */}
-        <section
-          style={{
-            border: "1px solid #e0e7ff",
-            borderRadius: 8,
-            padding: 16,
-            fontSize: 10,
-            color: "#555",
-          }}
-        >
-          <b>Important Terms & Conditions</b>
-          <ul style={{ marginTop: 10, paddingLeft: 20, lineHeight: 1.4 }}>
-            <li>Do not add products to your Cart/Wishlist/Save for later before visiting Amazon's website/app through CashKaro</li>
-            <li>If you ever had/have a Seller/Merchant/Affiliate account, you are not eligible for the Rewards</li>
-            <li>GST/Amazon Business users are not eligible for Rewards on the purchase of cell phones and mobile accessories</li>
-            <li>Order Amount considered for calculation of Rewards is the amount paid after subtracting GST and other charges</li>
-          </ul>
-          <a href="#" style={{ color: "#0059ff", fontSize: 11, textDecoration: "none" }}>
-            View All Terms & Conditions &rarr;
-          </a>
-        </section>
-      </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
