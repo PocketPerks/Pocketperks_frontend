@@ -14,10 +14,21 @@ interface NavbarProps {
 const Navbar = ({ onOpenSidebar }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  // ✅ Left side links (Logo ke pass hamburger)
+  const leftLinks = [
+    { name: 'BestPrice', path: '/' },
+  ];
+
+  // ✅ Centered links
+  const centerLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Online', path: '/online' },
+    { name: 'Our Store', path: '/Store' },
+  ];
+
+  // ✅ Right side links
+  const rightLinks = [
     { name: 'Refer & Earn', path: '/profile/MyReferal' },
-    { name: 'Missing?', path: '#' },
     { name: 'Profile', path: '/profile' },
     { name: 'Signup', path: '/Register' },
   ];
@@ -53,9 +64,23 @@ const Navbar = ({ onOpenSidebar }: NavbarProps) => {
             </div>
           </div>
 
-          {/* Desktop Links */}
+          {/* Center Links */}
+          <div className="hidden md:flex items-center space-x-6">
+            {centerLinks.map((link, idx) => (
+              <MotionLink
+                key={idx}
+                href={link.path}
+                whileHover={{ scale: 1.08, color: '#fb923c' }}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-200 transition-colors"
+              >
+                {link.name}
+              </MotionLink>
+            ))}
+          </div>
+
+          {/* Right Links */}
           <div className="hidden md:flex items-center space-x-4">
-            {navLinks.map((link, idx) => (
+            {rightLinks.map((link, idx) => (
               <MotionLink
                 key={idx}
                 href={link.path}
@@ -103,7 +128,7 @@ const Navbar = ({ onOpenSidebar }: NavbarProps) => {
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden bg-gray-900 mt-2 rounded-xl p-3 space-y-1 shadow-lg border border-white/10"
           >
-            {navLinks.map((link, idx) => (
+            {[...centerLinks, ...rightLinks].map((link, idx) => (
               <MotionLink
                 key={idx}
                 href={link.path}

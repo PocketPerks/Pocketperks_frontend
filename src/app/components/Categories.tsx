@@ -1,6 +1,7 @@
 'use client'
 import Link from "next/link";
 import { motion, Variants } from 'framer-motion'
+import Store from "../Store/store";
 
 const categories = [
   { name: 'Credit Cards', icon: '💳', path: '/Categories' },
@@ -33,6 +34,7 @@ const item: Variants = {
 
 const Categories = () => {
   return (
+    <>
     <motion.section
       initial="hidden"
       variants={container}
@@ -86,6 +88,11 @@ const Categories = () => {
         </motion.div>
       </div>
     </motion.section>
+    <div>
+      
+
+    </div>
+    </>
   )
 }
 

@@ -3,7 +3,7 @@
 import Navbar from "../components/Navbar";
 import dynamic from "next/dynamic";
 
-const CategoriesLoad = dynamic(() => import("./CategoriesLoad"), {
+const CategoriesLoad = dynamic(() => import("./CategoriesLoad"), {  
   ssr: false,
 });
 
