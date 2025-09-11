@@ -39,7 +39,7 @@ const EarningsCardsSection = ({ activeTab }: { activeTab: string }) => {
           <span className="text-sm font-medium uppercase">{status}</span>
         </div>
         <div className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-          ${amount}
+          ₹{amount}
         </div>
         <div className="flex flex-col space-y-3">
           {items.map((item, index) => (
@@ -62,7 +62,7 @@ const EarningsCardsSection = ({ activeTab }: { activeTab: string }) => {
                 </a>
               </div>
               <span className="text-sm font-semibold text-gray-900">
-                ${item.price}
+                ₹{item.price}
               </span>
             </div>
           ))}
@@ -96,7 +96,7 @@ export default function EarningsPage() {
             </h1>
           </div>
           <div className="flex-1 flex justify-end items-center space-x-4">
-            <div className="text-4xl md:text-5xl font-bold">${"0000"}</div>
+            <div className="text-4xl md:text-5xl font-bold">₹{"0000"}</div>
           </div>
         </header>
 
