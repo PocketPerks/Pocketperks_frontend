@@ -13,7 +13,7 @@ export default function ImagePreview({ images }: ImagePreviewProps) {
   return (
     <div>
       {/* Main Preview */}
-      <div className="relative rounded-2xl flex items-center justify-center mb-4 bg-white border border-gray-300 shadow-lg hover:shadow-xl transition-all overflow-hidden w-[720px] h-[550px]">
+      <div className="relative rounded-2xl flex items-center justify-center mb-4 bg-white border border-gray-300 transition-all overflow-hidden w-[720px] h-[550px]">
         <Image
           src={preview}
           alt="Product Preview"
