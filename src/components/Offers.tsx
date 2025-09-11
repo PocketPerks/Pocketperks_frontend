@@ -8,7 +8,7 @@ export default function Offers() {
     "flex flex-col items-center justify-between rounded-2xl border border-gray-300 bg-white p-6 shadow-sm hover:shadow-md transition hover:scale-[1.02]";
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {/* Offer 1 */}
       <Link href="/offers/discount" className={cardBase}>
         <div className="w-full flex justify-center items-center flex-1">
