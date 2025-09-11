@@ -13,36 +13,36 @@ export default function ImagePreview({ images }: ImagePreviewProps) {
   return (
     <div>
       {/* Main Preview */}
-      <div className="bg-white shadow rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+      <div className="relative rounded-2xl flex items-center justify-center mb-4 bg-white border border-gray-300 shadow-lg hover:shadow-xl transition-all overflow-hidden w-[720px] h-[550px]">
         <Image
           src={preview}
           alt="Product Preview"
-          width={800}   // adjust based on expected image size
-          height={600}  // adjust based on expected image size
-          className="object-contain w-full h-auto rounded"
+          fill
+          className="object-contain p-4"
           priority
         />
       </div>
 
       {/* Thumbnails */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 mt-6">
         {images.map((img, idx) => (
           <button
             key={idx}
             onClick={() => setPreview(img)}
-            className={`bg-white shadow rounded-lg flex-1 flex items-center justify-center cursor-pointer border-2 transition transform hover:scale-105 ${
+            className={`flex-1 flex items-center justify-center border-2 rounded-xl overflow-hidden cursor-pointer transition transform hover:scale-105 ${
               preview === img
                 ? "border-black ring-2 ring-black"
-                : "border-transparent"
+                : "border-gray-200"
             }`}
           >
-            <Image
-              src={img}
-              alt={`Thumbnail ${idx + 1}`}
-              width={100}
-              height={100}
-              className="object-contain rounded"
-            />
+            <div className="relative w-full h-28 bg-gray-100 flex items-center justify-center">
+              <Image
+                src={img}
+                alt={`Thumbnail ${idx + 1}`}
+                fill
+                className="object-contain p-2"
+              />
+            </div>
           </button>
         ))}
       </div>

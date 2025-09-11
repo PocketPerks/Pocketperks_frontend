@@ -34,7 +34,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   const handleImageError = () => setImgSrc("/fallback.jpg");
 
   return (
-    <div className="flex flex-col gap-5 bg-white border border-gray-300 rounded-3xl shadow-lg p-6 hover:shadow-xl transition-all w-full max-w-lg">
+    <div className="flex flex-col gap-5 bg-white border border-gray-300 rounded-3xl shadow-lg p-5 hover:shadow-xl transition-all w-full max-w-2xl">
       
       {/* Header */}
       <div className="flex items-start gap-6">
@@ -76,8 +76,9 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
         </div>
       )}
 
-      {/* Optional CTA */}
-      <button className="mt-4 px-5 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition">
+      {/* visit button */}
+      <button className="mt-4 px-5 py-3 bg-black text-white rounded-xl font-medium border-2 border-black shadow 
+          hover:bg-white hover:text-black transition">
         Visit Company
       </button>
     </div>

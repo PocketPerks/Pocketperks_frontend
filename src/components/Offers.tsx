@@ -1,70 +1,81 @@
 "use client";
 
-import { useState } from "react";
-import { Percent, Tag, Copy, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Offers() {
-  const [copied, setCopied] = useState(false);
-  const couponCode = "BANK123";
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(couponCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const cardBase =
+    "flex flex-col items-center justify-between rounded-2xl border border-gray-300 bg-white p-6 shadow-sm hover:shadow-md transition hover:scale-[1.02]";
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
       {/* Offer 1 */}
-      <Link
-        href="/offers/discount"
-        className="flex flex-col items-center justify-center gap-2 bg-yellow-50 border border-yellow-200 
-        rounded-xl p-5 shadow-sm hover:shadow-md hover:scale-105 transition"
-      >
-        <span className="bg-yellow-200 p-2 rounded-full">
-          <Percent className="w-6 h-6 text-yellow-800" />
-        </span>
-        <h3 className="font-semibold text-yellow-900">Upto 10%!!</h3>
-        <p className="text-sm text-yellow-700">Save big on your next order</p>
+      <Link href="/offers/discount" className={cardBase}>
+        <div className="w-full flex justify-center items-center flex-1">
+          <Image
+            src="/slider/fallback.jpg" 
+            alt="Offer 1"
+            width={400}
+            height={200}
+            className="object-contain w-full h-40"
+          />
+        </div>
+        <p className="text-base font-medium text-black mt-3">Upto 20% Off</p>
+        <button className="w-full rounded-lg bg-black text-white py-2 font-medium hover:bg-gray-800 transition mt-2">
+          Flat 10% Cashback
+        </button>
       </Link>
 
       {/* Offer 2 */}
-      <Link
-        href="/offers/special-deal"
-        className="flex flex-col items-center justify-center gap-2 bg-green-50 border border-green-200 
-        rounded-xl p-5 shadow-sm hover:shadow-md hover:scale-105 transition"
-      >
-        <span className="bg-green-200 p-2 rounded-full">
-          <Tag className="w-6 h-6 text-green-800" />
-        </span>
-        <h3 className="font-semibold text-green-900">Special Deal</h3>
-        <p className="text-sm text-green-700">On electronics & clothes</p>
+      <Link href="/offers/special-deal" className={cardBase}>
+        <div className="w-full flex justify-center items-center flex-1">
+          <Image
+            src="/slider/fallback.jpg"
+            alt="Offer 2"
+            width={400}
+            height={200}
+            className="object-contain w-full h-40"
+          />
+        </div>
+        <p className="text-base font-medium text-black mt-3">Upto 15% Off</p>
+        <button className="w-full rounded-lg bg-black text-white py-2 font-medium hover:bg-gray-800 transition mt-2">
+          Upto 5% Cashback
+        </button>
       </Link>
 
-      {/* Offer 3 - Copiable Coupon */}
-      <div
-        className="flex flex-col items-center justify-center gap-2 bg-blue-50 border border-blue-200 
-        rounded-xl p-5 shadow-sm hover:shadow-md hover:scale-105 transition"
-      >
-        <h3 className="font-semibold text-blue-900">Bank Offer</h3>
-        <p className="text-sm text-blue-700">Use code below for instant discount</p>
-
-        <div className="flex items-center gap-2 mt-2">
-          <span className="px-3 py-1 border rounded bg-white font-mono text-sm">
-            {couponCode}
-          </span>
-          <button
-            onClick={handleCopy}
-            className="flex items-center gap-1 text-sm px-2 py-1 rounded-lg bg-black text-white border-2 border-black font-medium shadow 
-        hover:bg-white hover:text-black transition"
-          >
-            {copied ? <CheckCircle size={16} /> : <Copy size={16} />}
-            {copied ? "Copied" : "Copy"}
-          </button>
+      {/* Offer 3 */}
+      <Link href="/offers/another-offer" className={cardBase}>
+        <div className="w-full flex justify-center items-center flex-1">
+          <Image
+            src="/slider/fallback.jpg"
+            alt="Offer 3"
+            width={400}
+            height={200}
+            className="object-contain w-full h-40"
+          />
         </div>
-        <p className="text-xs text-gray-500 mt-1">Verified | 5k+ users used this</p>
-      </div>
+        <p className="text-base font-medium text-black mt-3">Upto 25% Off</p>
+        <button className="w-full rounded-lg bg-black text-white py-2 font-medium hover:bg-gray-800 transition mt-2">
+          Upto 8% Cashback
+        </button>
+      </Link>
+
+      {/* Offer 3 */}
+      <Link href="/offers/another-offer" className={cardBase}>
+        <div className="w-full flex justify-center items-center flex-1">
+          <Image
+            src="/slider/fallback.jpg"
+            alt="Offer 3"
+            width={400}
+            height={200}
+            className="object-contain w-full h-40"
+          />
+        </div>
+        <p className="text-base font-medium text-black mt-3">Upto 25% Off</p>
+        <button className="w-full rounded-lg bg-black text-white py-2 font-medium hover:bg-gray-800 transition mt-2">
+          Upto 8% Cashback
+        </button>
+      </Link>
     </div>
   );
 }

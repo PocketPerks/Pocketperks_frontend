@@ -10,15 +10,17 @@ import CompanyCard from "@/components/CompanyCard";
 import ReviewComment from "@/components/ReviewComment";
 
 export default function ProductPage() {
-  const images = [
-    "/slider/dji.jpg",
-    "/slider/sony.jpg",
-    "/slider/canon.jpg",
-  ];
+  const images = ["/slider/amazonp.jpg", "/slider/fallback.jpg", "/slider/flipkart.jpg"];
 
   const reviews = [
-    { user: "Rahul S.", comment: "Amazing discounts! Got cashback within a week." },
-    { user: "Ananya P.", comment: "Coupons work perfectly, saved a lot on my order." },
+    {
+      user: "Rahul S.",
+      comment: "Amazing discounts! Got cashback within a week.",
+    },
+    {
+      user: "Ananya P.",
+      comment: "Coupons work perfectly, saved a lot on my order.",
+    },
     { user: "Vikram K.", comment: "Fast delivery and great customer support." },
   ];
 
@@ -35,7 +37,6 @@ export default function ProductPage() {
 
         {/* Right Section */}
         <div className="flex flex-col gap-6">
-
           <CompanyCard
             logo="/logos/amazon.png"
             name="Amazon"
@@ -45,25 +46,13 @@ export default function ProductPage() {
             reviewComments={reviews}
           />
 
-          <Offers />
-
           <ActionButtons />
         </div>
       </main>
 
       <section className="container mx-auto px-6 py-10 space-y-10">
-
+        <Offers />
         <Description />
-
-        {/* Reviews Section
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Reviews</h2>
-          <div className="flex flex-col gap-4">
-            {reviews.map((r, idx) => (
-              <ReviewComment key={idx} user={r.user} comment={r.comment} />
-            ))}
-          </div>
-        </div> */}
       </section>
       <Footer />
     </div>
