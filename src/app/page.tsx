@@ -8,6 +8,7 @@ import Offers from "@/components/Offers";
 import ActionButtons from "@/components/ActionButtons";
 import CompanyCard from "@/components/CompanyCard";
 import ReviewComment from "@/components/ReviewComment";
+import Terms from "@/components/Terms";
 
 export default function ProductPage() {
   const images = ["/slider/amazonp.jpg", "/slider/fallback.jpg", "/slider/flipkart.jpg"];
@@ -52,7 +53,11 @@ export default function ProductPage() {
 
       <section className="container mx-auto px-6 py-10 space-y-10">
         <Offers />
-        <Description />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Description />
+        <Terms/>
+        </div>
+        
       </section>
       <Footer />
     </div>
