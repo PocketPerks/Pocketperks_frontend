@@ -1,13 +1,15 @@
 "use client";
 
-import { Home, ShoppingBag, User, ShoppingCart } from "lucide-react";
+import { Home, ShoppingBag, User, ShoppingCart, Shield } from "lucide-react";
 
 export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-200">
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">PocketPerks</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+          PocketPerks
+        </h1>
 
         {/* Links */}
         <div className="flex items-center space-x-8 text-gray-700 font-medium">
@@ -28,6 +30,12 @@ export default function Navbar() {
             className="flex items-center gap-2 hover:text-black transition-colors duration-200"
           >
             <User className="w-5 h-5" /> Profile
+          </a>
+          <a
+            href="/admin"
+            className="flex items-center gap-2 hover:text-black transition-colors duration-200"
+          >
+            <Shield className="w-5 h-5" /> Admin
           </a>
         </div>
 
