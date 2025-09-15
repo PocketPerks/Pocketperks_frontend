@@ -1,7 +1,8 @@
 'use client'
 import Link from "next/link";
 import { motion, Variants } from 'framer-motion'
-import Store from "../Store/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const categories = [
   { name: 'Credit Cards', icon: '💳', path: '/Categories' },
@@ -33,6 +34,25 @@ const item: Variants = {
 }
 
 const Categories = () => {
+  const [getcategories , setgetchategories] = useState([])
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/categories", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setgetchategories(res.data);
+        console.log(res.data.message || "fetch successfully");
+      } catch (error) {
+        console.log("failed to fetch", error);
+      }
+    };
+
+    fetchdata();
+  }, []);
   return (
     <>
     <motion.section
@@ -40,18 +60,16 @@ const Categories = () => {
       variants={container}
       whileInView="show"
       viewport={{ once: true }}
-      className="relative py-16 bg-gray-900 text-white overflow-hidden"
+      className="relative py-16 bg-white text-black overflow-hidden"
     >
-      {/* soft floating orbs */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-48 h-48 bg-indigo-500 rounded-full blur-2xl opacity-15 animate-pulse"></div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-5xl font-extrabold drop-shadow-sm mb-4">
+          <h2 className="text-3xl md:text-5xl text-black font-extrabold drop-shadow-sm mb-4">
             ✨ Top Categories
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-black/40 max-w-2xl mx-auto">
             Explore our wide range of categories and grab the hottest deals!
           </p>
         </div>
@@ -60,9 +78,9 @@ const Categories = () => {
           variants={container}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5"
         >
-          {categories.map((category, index) => (
+          {getcategories.map((category) => (
             <motion.div
-              key={index}
+              key={category.id}
               variants={item}
               whileHover={{ rotateY: 8, rotateX: -8, scale: 1.05 }}
               whileInView='show'
@@ -73,13 +91,13 @@ const Categories = () => {
               {/* soft glow border */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 blur-md opacity-20 group-hover:opacity-40 transition"></div>
 
-              <Link href={category.path}>
+              <Link href={`/Categories/${category.id}`}>
                 <div className="relative bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl p-5 text-center cursor-pointer shadow-lg overflow-hidden">
-                  <div className="relative z-10 text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
+                  <div  className="relative z-10 text-4xl flex justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <img  className="h-15 " src={category.image_url}/>
                   </div>
                   <h3 className="relative z-10 text-sm font-semibold text-gray-200 group-hover:text-pink-400 transition-colors">
-                    {category.name}
+                    {category.category_name}
                   </h3>
                 </div>
               </Link>

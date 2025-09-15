@@ -35,9 +35,7 @@ const Navbar = ({ onOpenSidebar }: NavbarProps) => {
 
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: 'spring', stiffness: 40 }}
+      
       className="sticky top-0 z-50 bg-gray-900 text-white backdrop-blur-md shadow-lg border-b border-white/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -72,6 +70,7 @@ const Navbar = ({ onOpenSidebar }: NavbarProps) => {
                 href={link.path}
                 whileHover={{ scale: 1.08, color: '#fb923c' }}
                 className="px-3 py-2 rounded-md text-sm font-medium text-gray-200 transition-colors"
+                prefetch={true}
               >
                 {link.name}
               </MotionLink>

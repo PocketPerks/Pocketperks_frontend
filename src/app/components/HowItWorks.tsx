@@ -61,18 +61,15 @@ const HowItWorks = () => {
       whileInView="show"
       viewport={{once:true}}
       variants={container}
-      className="py-20 relative bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-950 text-white overflow-hidden"
+      className="py-20 relative bg-white overflow-hidden"
     >
       {/* Background Neon Blobs */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute w-72 h-72 bg-cyan-500/20 rounded-full blur-[120px] top-20 left-32 animate-pulse"></div>
-        <div className="absolute w-80 h-80 bg-blue-500/20 rounded-full blur-[150px] bottom-10 right-32 animate-ping"></div>
-      </div>
+     
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div variants={item} className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent drop-shadow-lg">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-black bg-clip-text text-transparent drop-shadow-lg">
             How CashKaro Works
           </h2>
           <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
@@ -88,12 +85,10 @@ const HowItWorks = () => {
               variants={item}
               whileHover={{ scale: 1.05, rotateY: 6, rotateX: -6 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="text-center relative cursor-pointer"
+              className="text-center  relative cursor-pointer"
             >
               {/* Step Number */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-cyan-500/50">
-                {index + 1}
-              </div>
+              
 
               {/* Card */}
               <div className="bg-white/5 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-6 shadow-md hover:shadow-cyan-500/40 transition-shadow duration-300 h-full">
@@ -113,17 +108,17 @@ const HowItWorks = () => {
           whileHover={{ scale: 1.03 }}
           transition={{ type: "spring", stiffness: 150 }}
         >
-          <div className="bg-white/5 backdrop-blur-md border border-indigo-500/30 rounded-2xl p-10 shadow-lg max-w-2xl mx-auto cursor-pointer">
+          <div className="bg-black/10 rounded-2xl p-10 shadow-lg max-w-2xl mx-auto cursor-pointer">
             <div className="text-5xl mb-4">🎁</div>
             <h3 className="text-3xl font-bold text-cyan-400 mb-4">
               Refer Friends & Earn Forever
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-black mb-6">
               Invite your friends to CashKaro and earn rewards for every successful referral
             </p>
             <button
               onClick={handlerander}
-              className="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/30"
+              className="px-8 py-3 rounded-full font-semibold bg-black/10 transition-all shadow-lg shadow-black-500/30"
             >
               Invite CashKaro
             </button>

@@ -26,12 +26,12 @@ const Hero = () => {
       viewport={{once:true}}
 
       variants={container}
-      className="relative bg-gradient-to-r from-orange-50 to-yellow-50 overflow-hidden"
+      className="relative bg-white overflow-hidden"
     >
       {/* Banner */}
       <motion.div
         variants={item}
-        className="relative h-96 md:h-[500px] flex items-center justify-center bg-gradient-to-r from-orange-400 to-yellow-400"
+        className="relative h-96 md:h-[500px] flex items-center justify-center bg-white"
       >
         <motion.div 
           className="text-center px-4"
@@ -44,7 +44,7 @@ const Hero = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-white/90">
             Shop online and earn cashback on every purchase. Get the best deals and save money!
           </p>
-          <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
+          <button className="bg-black/10 text-orange-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
             Start Shopping Now
           </button>
         </motion.div>

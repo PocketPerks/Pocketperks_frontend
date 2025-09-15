@@ -10,14 +10,14 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="relative py-16 bg-gradient-to-b from-indigo-950 via-purple-900 to-pink-950">
+    <section className="relative py-16 bg-white">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-black drop-shadow-lg mb-4">
             🌟 Meet Our Superstars
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-black/30 max-w-2xl mx-auto">
             See what our users have to say about their CashKaro experience
           </p>
         </div>
@@ -26,15 +26,15 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, idx) => (
             <div key={idx} className="relative group">
-              <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+              <div className="relative bg-black/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="text-3xl">{testimonial.avatar}</div>
                   <div className="flex-1">
-                    <p className="text-gray-200 mb-4 italic">
+                    <p className="text-black mb-4 italic">
                       "{testimonial.content}"
                     </p>
                     <div className="flex items-center justify-between">
-                      <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                      <h4 className="font-semibold text-black">{testimonial.name}</h4>
                       <button className="text-orange-400 hover:text-orange-500 text-sm font-medium">
                         See more
                       </button>

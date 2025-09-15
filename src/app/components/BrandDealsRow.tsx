@@ -10,12 +10,13 @@ const BrandDealsRow = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/credit-cards", {
+        const res = await axios.get("http://172.30.2.161:4000/api/credit-cards", {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        setgetcards(res.data.cards);
+        // agar res.data.cards nahi mila toh res.data ko hi set karo
+        setgetcards(res.data.cards || res.data || []);
         console.log(res.data.message || "fetch successfully");
       } catch (error) {
         console.log("failed to fetch", error);
@@ -26,10 +27,8 @@ const BrandDealsRow = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-gray-900 relative overflow-hidden text-white">
-      {/* soft floating gradient orbs */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-purple-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-48 h-48 bg-blue-600 rounded-full blur-2xl opacity-15 animate-pulse"></div>
+    <section className="py-12 bg-white relative overflow-hidden text-white">
+      
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
@@ -61,18 +60,18 @@ const BrandDealsRow = () => {
 
               <div className="relative bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl shadow-lg overflow-hidden">
                 <BrandDealCard
-                  href={card.link}
+                  href={card.link || "#"}
                   brandName={card.bank_name}
                   logo={
                     <img 
                       src={card.image_url} 
-                      alt={card.card_name} 
+                      alt={card.bank_name || "card image"} 
                       className="w-10 h-10 object-contain rounded-full"
                     />
                   }
-                  offerText={`${card.cashback_percent}% Cashback`}
-                  subText={card.joining_offer}
-                  cashbackText={card.benefits}
+                  offerText={`${card.cashback_percent || 0}% Cashback`}
+                  subText={card.joining_offer || "No Joining Offer"} 
+                  cashbackText={card.benefits || "No Extra Benefits"} 
                   bgClass="from-indigo-500 to-purple-600"
                 />
               </div>
