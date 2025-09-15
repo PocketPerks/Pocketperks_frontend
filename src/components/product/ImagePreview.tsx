@@ -11,9 +11,9 @@ export default function ImagePreview({ images }: ImagePreviewProps) {
   const [preview, setPreview] = useState(images[0]);
 
   return (
-    <div>
+    <div className="flex flex-col">
       {/* Main Preview */}
-      <div className="relative rounded-2xl flex items-center justify-center mb-4 bg-white border border-gray-300 transition-all overflow-hidden w-[720px] h-[550px]">
+      <div className="relative w-full max-w-[720px] aspect-[720/550] mx-auto rounded-2xl mb-4 bg-white border border-gray-300 overflow-hidden">
         <Image
           src={preview}
           alt="Product Preview"

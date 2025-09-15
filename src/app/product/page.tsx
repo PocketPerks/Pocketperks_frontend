@@ -10,7 +10,11 @@ import CompanyCard from "@/components/product/CompanyCard";
 import Terms from "@/components/product/Terms";
 
 export default function ProductPage() {
-  const images = ["/slider/amazonp.jpg", "/slider/fallback.jpg", "/slider/flipkart.jpg"];
+  const images = [
+    "/slider/amazonp.jpg",
+    "/slider/fallback.jpg",
+    "/slider/flipkart.jpg",
+  ];
 
   const reviews = [
     {
@@ -25,7 +29,7 @@ export default function ProductPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 pt-16">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
 
       {/* Main Content */}
@@ -54,9 +58,8 @@ export default function ProductPage() {
         <Offers />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Description />
-        <Terms/>
+          <Terms />
         </div>
-        
       </section>
       <Footer />
     </div>

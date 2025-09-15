@@ -59,23 +59,6 @@ export default function Offers() {
           Upto 8% Cashback
         </button>
       </Link>
-
-      {/* Offer 3 */}
-      <Link href="/offers/another-offer" className={cardBase}>
-        <div className="w-full flex justify-center items-center flex-1">
-          <Image
-            src="/slider/fallback.jpg"
-            alt="Offer 3"
-            width={400}
-            height={200}
-            className="object-contain w-full h-40"
-          />
-        </div>
-        <p className="text-base font-medium text-black mt-3">Upto 25% Off</p>
-        <button className="w-full rounded-lg bg-black text-white py-2 font-medium hover:bg-gray-800 transition mt-2">
-          Upto 8% Cashback
-        </button>
-      </Link>
     </div>
   );
 }

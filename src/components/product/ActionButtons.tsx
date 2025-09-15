@@ -8,7 +8,6 @@ export default function ActionButtons() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [closing, setClosing] = useState(false);
 
-  // Example cashback rates
   const cashbackRates = [
     {
       rate: "12%",
@@ -32,6 +31,7 @@ export default function ActionButtons() {
 
   return (
     <div className="border rounded-3xl p-5 inline-block space-y-4 flex-col gap-5 bg-white border-gray-300 shadow-lg hover:shadow-xl transition-all w-full max-w-2xl">
+      
       {/* Rewards Button */}
       <button
         onClick={() => setShowSidebar(true)}
