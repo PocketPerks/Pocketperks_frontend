@@ -31,7 +31,6 @@ export default function ProductPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
-
       {/* Main Content */}
       <main className="flex-1 container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Section */}
