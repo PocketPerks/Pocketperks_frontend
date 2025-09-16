@@ -11,7 +11,6 @@ export default function Navbar() {
           PocketPerks
         </h1>
 
-        {/* Links */}
         <div className="flex items-center space-x-8 text-gray-700 font-medium">
           <a
             href="/home"
@@ -38,8 +37,6 @@ export default function Navbar() {
             <Shield className="w-5 h-5" /> Admin
           </a>
         </div>
-
-        {/* Cart */}
         <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
           <ShoppingCart className="w-5 h-5" />
           <span className="hidden sm:inline">Cart</span>
