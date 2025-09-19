@@ -76,7 +76,16 @@ const contacts = [
   },
 ];
 
-const ChatBubbles = ({ messages }) => {
+type Message = {
+  sender: string;
+  time: string;
+  message: string;
+  status: string;
+  isYou: boolean;
+  avatar: string;
+};
+
+const ChatBubbles = ({ messages }: { messages: Message[] }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,7 +95,7 @@ const ChatBubbles = ({ messages }) => {
   return (
     <div className="flex-1 p-3 md:p-8 overflow-y-auto bg-gray-50">
       <div className="flex flex-col space-y-4">
-        {messages.map((bubble, index) => (
+        {messages.map((bubble: Message, index: number) => (
           <div
             key={index}
             className={`flex items-end gap-2 ${
@@ -96,46 +105,46 @@ const ChatBubbles = ({ messages }) => {
             {/* Sender's avatar */}
             {!bubble.isYou && (
               <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 mt-2 border border-gray-200">
-                <Image
-                  src={bubble.avatar}
-                  alt={`${bubble.sender}'s avatar`}
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                />
+          <Image
+            src={bubble.avatar}
+            alt={`${bubble.sender}'s avatar`}
+            width={32}
+            height={32}
+            className="object-cover"
+          />
               </div>
             )}
 
             {/* Chat bubble content */}
             <div
               className={`p-4 rounded-2xl max-w-xs md:max-w-sm shadow-sm ${
-                bubble.isYou
-                  ? 'bg-black text-white self-end rounded-br-none'
-                  : 'bg-white text-gray-900 self-start rounded-bl-none border border-gray-200'
+          bubble.isYou
+            ? 'bg-black text-white self-end rounded-br-none'
+            : 'bg-white text-gray-900 self-start rounded-bl-none border border-gray-200'
               } relative`}
             >
               <div className="flex items-baseline space-x-2">
-                <span className="font-semibold text-xs md:text-sm">
-                  {bubble.isYou ? 'You' : bubble.sender}
-                </span>
-                <span className="text-xs opacity-60">{bubble.time}</span>
+          <span className="font-semibold text-xs md:text-sm">
+            {bubble.isYou ? 'You' : bubble.sender}
+          </span>
+          <span className="text-xs opacity-60">{bubble.time}</span>
               </div>
               <p className="mt-1 break-words">{bubble.message}</p>
               <span className="block text-[10px] opacity-50 mt-1 text-right">
-                {bubble.status}
+          {bubble.status}
               </span>
             </div>
 
             {/* Your avatar */}
             {bubble.isYou && (
               <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 mt-2 border border-gray-200">
-                <Image
-                  src={bubble.avatar}
-                  alt="Your avatar"
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                />
+          <Image
+            src={bubble.avatar}
+            alt="Your avatar"
+            width={32}
+            height={32}
+            className="object-cover"
+          />
               </div>
             )}
           </div>
