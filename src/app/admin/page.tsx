@@ -1,9 +1,9 @@
 "use client";
 
-import { Settings, Building2, Users, MessageSquareMore } from "lucide-react";
+import { Settings, Building2, Users as UsersIcon, MessageSquareMore } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; 
 import Company from "@/components/admin/Company";
 import Chat from "@/components/admin/Chat";
 
@@ -11,7 +11,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("Company");
   const tabs = [
     { label: "Company", icon: Building2 },
-    { label: "Users", icon: Users },
+    { label: "Users", icon: UsersIcon },
     { label: "Chat", icon: MessageSquareMore },
     { label: "Settings", icon: Settings },
   ];
@@ -44,7 +44,7 @@ export default function AdminPage() {
         <section className="flex-1 bg-white rounded-2xl shadow p-6 h-[calc(100vh-4rem)] flex flex-col">
           {activeTab === "Settings" && <Settings />}
           {activeTab === "Company" && <Company />}
-          {activeTab === "Users" && <Users />}
+          {/* {activeTab === "Users" && <Users />} */}
           {activeTab === "Chat" && <Chat />}
         </section>
       </div>
