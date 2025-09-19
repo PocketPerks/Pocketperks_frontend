@@ -1,26 +1,28 @@
 "use client";
 
-import { Settings, Building2, Users } from "lucide-react";
+import { Settings, Building2, Users, MessageSquareMore } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Company from "@/components/admin/Company";
+import Chat from "@/components/admin/Chat";
 
-export default function ProfilePage() {
+export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("Company");
   const tabs = [
     { label: "Company", icon: Building2 },
     { label: "Users", icon: Users },
+    { label: "Chat", icon: MessageSquareMore },
     { label: "Settings", icon: Settings },
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-gray-50 pt-16">
+    <main className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
 
       <div className="flex flex-1 p-6 gap-6">
         {/* Sidebar */}
-        <aside className="w-64 bg-white rounded-2xl shadow p-4 space-y-2 sticky top-16 h-[calc(100vh-4rem)]">
+        <aside className="w-64 bg-white rounded-2xl shadow p-4 space-y-2 sticky top-16 h-100vh">
           {tabs.map(({ label, icon: Icon }) => (
             <button
               key={label}
@@ -39,16 +41,13 @@ export default function ProfilePage() {
         </aside>
 
         {/* Content */}
-        <section className="flex-1 bg-white rounded-2xl shadow p-6 overflow-y-auto h-[calc(100vh-4rem)]">
+        <section className="flex-1 bg-white rounded-2xl shadow p-6 h-[calc(100vh-4rem)] flex flex-col">
           {activeTab === "Settings" && <Settings />}
           {activeTab === "Company" && <Company />}
           {activeTab === "Users" && <Users />}
+          {activeTab === "Chat" && <Chat />}
         </section>
       </div>
-
-      <Footer />
     </main>
   );
 }
-
-
