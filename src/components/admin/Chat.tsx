@@ -136,7 +136,7 @@ export default function ChatPage() {
     <div className="flex flex-col md:flex-row h-[80vh] md:h-[calc(100vh-6rem)] font-sans bg-gray-50 rounded-2xl shadow overflow-hidden">
       {/* ContactArea */}
       <aside className="w-full md:w-1/4 min-w-[250px] border-r border-gray-200 bg-white flex flex-col">
-        <h1 className="text-2xl md:text-3xl font-bold px-4 pt-4 pb-2">Chat</h1>
+        <h1 className="text-2xl md:text-3xl font-bold px-4 pt-4 pb-2 text-black">Chat</h1>
 
         {/*tabs*/}
         <nav className="flex gap-6 border-b border-gray-200 px-4 bg-white sticky top-0 z-10">

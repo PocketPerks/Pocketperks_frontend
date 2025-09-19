@@ -41,7 +41,7 @@ export default function AdminPage() {
         </aside>
 
         {/* Content */}
-        <section className="flex-1 bg-white rounded-2xl shadow p-6 h-[calc(100vh-4rem)] flex flex-col">
+        <section className="flex-1 bg-white rounded-2xl shadow">
           {activeTab === "Settings" && <Settings />}
           {activeTab === "Company" && <Company />}
           {/* {activeTab === "Users" && <Users />} */}

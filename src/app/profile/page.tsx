@@ -41,7 +41,7 @@ export default function ProfilePage() {
         </aside>
 
         {/* Content */}
-        <section className="flex-1 bg-white rounded-2xl shadow p-6 overflow-y-auto h-[calc(100vh-4rem)]">
+        <section className="flex-1 bg-white rounded-2xl shadow overflow-y-auto ">
           {activeTab === "Earnings" && <Earnings />}
           {activeTab === "Settings" && <Settings />}
           {activeTab === "Company" && <Company />}
