@@ -48,8 +48,8 @@ export default function HomePage() {
   const trackX = `-${currentIndex * slidePercent}%`; // translateX for the track (percent of track width)
 
   return (
-    <main className="p-6 bg-gradient-to-b from-orange-50 to-white min-h-screen flex items-center justify-center">
-      <section className="relative w-full max-w-6xl h-[28rem] rounded-2xl overflow-hidden shadow-2xl flex">
+    <main className="p-6 bg-gradient-to-b from-orange-50 to-white min-h-screen flex justify-center">
+      <section className="relative w-full max-w-full h-[28rem] rounded-2xl overflow-hidden shadow-2xl flex">
         {/* gradient */}
         <div className="w-1/2 relative overflow-hidden">
           {slides.map((s, i) => (
