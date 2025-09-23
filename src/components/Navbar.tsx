@@ -53,6 +53,13 @@ export default function Navbar() {
             <ShoppingBag className="w-5 h-5" /> Shop
           </a>
           <a
+            href="/online"
+            className="flex items-center gap-2 hover:text-black hover:bg-gray-100 transition-colors duration-200 py-2 px-6 md:py-0 md:px-0 rounded focus:outline-none focus:ring-2 focus:ring-black/30"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <ShoppingBag className="w-5 h-5" /> Online
+          </a>
+          <a
             href="/profile"
             className="flex items-center gap-2 hover:text-black hover:bg-gray-100 transition-colors duration-200 py-2 px-6 md:py-0 md:px-0 rounded focus:outline-none focus:ring-2 focus:ring-black/30"
             onClick={() => setIsMenuOpen(false)}
