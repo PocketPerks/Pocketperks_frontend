@@ -8,12 +8,11 @@ import Earnings from "@/components/profile/Earnings";
 import Company from "@/components/admin/Company";
 
 export default function ProfilePage() {
-  const [activeTab, setActiveTab] = useState("Earnings");
+  const [activeTab, setActiveTab] = useState("Account");
   const tabs = [
+    { label: "Account", icon: Users },
     { label: "Earnings", icon: DollarSign },
-    // { label: "Company", icon: Building2 },
-    // { label: "Users", icon: Users },
-    // { label: "Settings", icon: Settings },
+    { label: "Settings", icon: Settings },
   ];
 
   return (

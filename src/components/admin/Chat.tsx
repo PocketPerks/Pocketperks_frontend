@@ -139,7 +139,7 @@ export default function ChatPage() {
         <h1 className="text-2xl md:text-3xl font-bold px-4 pt-4 pb-2 text-black">Chat</h1>
 
         {/*tabs*/}
-        <nav className="flex gap-6 border-b border-gray-200 px-4 bg-white sticky top-0 z-10">
+        <nav className="flex justify-center gap-6 border-b border-gray-200 px-4 bg-white sticky top-0 z-10">
           {tabs.map((tab) => (
             <button
               key={tab}

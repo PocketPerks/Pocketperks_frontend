@@ -71,7 +71,7 @@ export default function Company() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <button
         onClick={() => setOpen(true)}
         className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800"

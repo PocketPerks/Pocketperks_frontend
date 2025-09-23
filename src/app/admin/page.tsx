@@ -1,9 +1,10 @@
 "use client";
 
-import { Settings, Building2, Users as UsersIcon, MessageSquareMore } from "lucide-react";
+import { Settings, Building2, Users as UsersIcon, MessageSquareMore, FileChartColumnIncreasing } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"; 
+import Finance from "@/components/admin/FinanceCompany";
 import Company from "@/components/admin/Company";
 import Chat from "@/components/admin/Chat";
 
@@ -13,7 +14,7 @@ export default function AdminPage() {
     { label: "Company", icon: Building2 },
     { label: "Users", icon: UsersIcon },
     { label: "Chat", icon: MessageSquareMore },
-    { label: "Settings", icon: Settings },
+    { label: "Finance", icon: FileChartColumnIncreasing },
   ];
 
   return (
@@ -42,7 +43,7 @@ export default function AdminPage() {
 
         {/* Content */}
         <section className="flex-1 bg-white rounded-2xl shadow">
-          {activeTab === "Settings" && <Settings />}
+          {activeTab === "Finance" && <Finance />}
           {activeTab === "Company" && <Company />}
           {/* {activeTab === "Users" && <Users />} */}
           {activeTab === "Chat" && <Chat />}
