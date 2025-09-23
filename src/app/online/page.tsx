@@ -80,7 +80,7 @@ export default function HomePage() {
                 {slides[currentIndex].text}
               </p>
 
-              <button className="mt-8 inline-block px-7 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition transform">
+              <button className="mt-8 inline-block px-25 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition transform">
                 Explore Now
               </button>
             </motion.div>
