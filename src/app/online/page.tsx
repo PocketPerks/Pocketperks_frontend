@@ -24,9 +24,9 @@ export default function HomePage() {
       text: "On Latest Gadgets",
     },
     {
-      src: "/slider/GIF.jpeg",
+      src: "/slider/myntra.jpeg",
       gradient:
-        "linear-gradient(135deg, rgba(236,72,153,0.95) 0%, rgba(239,68,68,0.95) 50%, rgba(249,115,22,0.95) 100%)",
+        "linear-gradient(135deg, rgba(236,72,153,0.95) 0%, rgba(219,39,119,0.95) 50%, rgba(236,72,153,0.95) 100%)",
       title: "Festive Fashion Deals",
       subtitle: "Flat 40% Off",
       text: "On Top Brands",
@@ -136,7 +136,7 @@ export default function HomePage() {
               key={i}
               onClick={() => setCurrentIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className={`w-3.5 h-3.5 rounded-full transition-transform ${
+              className={`w-8 h-3.5 rounded-lg transition-transform ${
                 i === currentIndex ? "bg-white scale-125" : "bg-white/40"
               }`}
             />

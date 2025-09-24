@@ -130,6 +130,7 @@ export default function Finance() {
                 <th className="px-4 py-3 text-left">Amount</th>
                 <th className="px-4 py-3 text-left">Cashback</th>
                 <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Aproval</th>
                 <th className="px-4 py-3 text-left">Date</th>
               </tr>
             </thead>
@@ -157,6 +158,7 @@ export default function Finance() {
                       {txn.status}
                     </span>
                   </td>
+                  <td className="px-4 py-3 text-gray-600">{txn.date}</td>
                   <td className="px-4 py-3 text-gray-600">{txn.date}</td>
                 </tr>
               ))}
