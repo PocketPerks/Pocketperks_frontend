@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import Finance from "@/components/admin/FinanceCompany";
 import Company from "@/components/admin/Company";
 import Chat from "@/components/admin/Chat";
+import { IoColorPaletteOutline } from "react-icons/io5";
+import UsersPage from "@/components/admin/Users";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("Company");
@@ -15,6 +17,7 @@ export default function AdminPage() {
     { label: "Users", icon: UsersIcon },
     { label: "Chat", icon: MessageSquareMore },
     { label: "Finance", icon: FileChartColumnIncreasing },
+    { label: "Customize", icon: IoColorPaletteOutline },
   ];
 
   return (
@@ -45,8 +48,9 @@ export default function AdminPage() {
         <section className="flex-1 bg-white rounded-2xl shadow">
           {activeTab === "Finance" && <Finance />}
           {activeTab === "Company" && <Company />}
-          {/* {activeTab === "Users" && <Users />} */}
+          {activeTab === "Users" && <UsersPage />}
           {activeTab === "Chat" && <Chat />}
+          {/* {activeTab === "Customize" && <customize />} */}
         </section>
       </div>
     </main>
