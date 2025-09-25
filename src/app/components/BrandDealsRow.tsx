@@ -56,7 +56,7 @@ const BrandDealsRow = () => {
               className="relative group"
             >
               {/* subtle soft glow border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 blur-lg opacity-40 group-hover:opacity-60 transition"></div>
+              <div className="absolute inset-0 rounded-2xl bg-black group-hover:opacity-60 transition"></div>
 
               <div className="relative bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl shadow-lg overflow-hidden">
                 <BrandDealCard

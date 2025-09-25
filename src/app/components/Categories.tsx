@@ -35,6 +35,11 @@ const item: Variants = {
 
 const Categories = () => {
   const [getcategories , setgetchategories] = useState([])
+  const [viewCategories , setViewCategories] = useState(12)
+
+  const handleview = () => {
+    setViewCategories(viewCategories + 9)
+  }
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -78,9 +83,9 @@ const Categories = () => {
           variants={container}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5"
         >
-          {getcategories.map((category) => (
+          {getcategories.slice(0 ,viewCategories).map((category , index) => (
             <motion.div
-              key={category.id}
+              key={category.id }
               variants={item}
               whileHover={{ rotateY: 8, rotateX: -8, scale: 1.05 }}
               whileInView='show'
@@ -94,7 +99,7 @@ const Categories = () => {
               <Link href={`/Categories/${category.id}`}>
                 <div className="relative bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl p-5 text-center cursor-pointer shadow-lg overflow-hidden">
                   <div  className="relative z-10 text-4xl flex justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                    <img  className="h-15 " src={category.image_url}/>
+                    
                   </div>
                   <h3 className="relative z-10 text-sm font-semibold text-gray-200 group-hover:text-pink-400 transition-colors">
                     {category.category_name}
@@ -107,6 +112,9 @@ const Categories = () => {
       </div>
     </motion.section>
     <div>
+      <div className="w-full flex justify-center">
+      <button className="bg-black/20 rounded-2xl p-4" onClick={handleview}>View More+</button>
+      </div>
       
 
     </div>

@@ -1,177 +1,244 @@
-'use client'
-import { useState } from "react"
-import { BankData, electronicData, MakeupData, OnlineData, ReachrgeData } from "./OnlineData"
-import { motion } from "framer-motion"
-import Link from "next/link";
-import { title } from "process";
+"use client"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { ChevronRight, Heart, Star } from "lucide-react"
+import AliceCarousel from "react-alice-carousel"
+import "react-alice-carousel/lib/alice-carousel.css"
+import Image from "next/image"
+import OnlineSlider from "./OnlineSlider"
 
 export default function Onlinepage() {
-  const [viewaall , setviewall] = useState(2)
+  const [getcards, setgetcards] = useState([])
+  const [slice, setslice] = useState(6)
+  const [rating, setRating] = useState(2)
+  const [liked, setLiked] = useState({})
+  const [activeIndex, setActiveIndex] = useState(0)
 
-  const allCarts = [
-    { title:"Shopping", slider: OnlineData },
-    { title:"Makeup", slider: MakeupData },
-    { title:"Bank Offers", slider: BankData },
-    { title:"Recharge", slider: ReachrgeData },
-    {title:"Electronic" , slider:electronicData}
+  const handleView = () => {
+    setslice((prev) => prev + 4)
+  }
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await axios.get("http://172.30.2.161:4000/api/online/offers", {
+          headers: { "Content-Type": "application/json" },
+        })
+        setgetcards(res.data || [])
+      } catch (error) {
+        console.log("failed to fetch", error)
+      }
+    }
+    fetchdata()
+  }, [])
+
+  // ✅ Banner images
+  const banners = [
+    {
+      images: "/Electronic.jpg",
+      title: "Amazon",
+      description: "Great Indian fest",
+      offer: "min 30% off",
+      product: "skin care",
+    },
+    {
+      images: "/flipkart.jpg",
+      title: "Flipkart",
+      description: "Great Indian fest",
+      offer: "min 30% off",
+      product: "skin care",
+    },
+    {
+      images: "/Cloth.jpg",
+      title: "Clothes",
+      description: "Great Indian fest",
+      offer: "min 30% off",
+      product: "skin care",
+    },
   ]
 
-  const categories = [
-    { name: 'Credit Cards', icon: '💳', path: '/Categories' },
-    { name: 'Biggest Sales', icon: '🔥', path: '/Categories' },
-    { name: 'Rakhi Specials', icon: '🎁', path: '/Categories' },
-    { name: 'New on CashKaro', icon: '🆕', path: '/Categories' },
-    { name: 'Fashion', icon: '👗', path: '/Categories' },
-    { name: 'Pharmacy', icon: '💊', path: '/Categories' },
-    { name: 'Mobiles', icon: '📱', path: '/Categories' },
-    { name: 'Food & Grocery', icon: '🛒', path: '/Categories' },
-    { name: 'Beauty & Grooming', icon: '💄', path: '/Categories' },
-    { name: 'Flights & Hotels', icon: '✈️', path: '/Categories' },
-    { name: 'Health & Wellness', icon: '🏥', path: '/Categories' },
-    { name: 'Education', icon: '📚', path: '/Categories' },
-    { name: 'Departmental', icon: '🏪', path: '/Categories' },
-    { name: 'Electronics', icon: '🔌', path: '/Categories' },
-    { name: 'Home & Kitchen', icon: '🏠', path: '/Categories' },
-    { name: 'Loans', icon: '💰', path: '/Categories' }
-  ];
+  const sites = [
+    { name: "Amazon", img: "/filipkaronline2.png", cashback: "Flat 10% Cashback" },
+    { name: "Myntra", img: "/filipkaronline2.png", cashback: "Flat 12% Cashback" },
+    { name: "Flipkart", img: "/filipkaronline2.png", cashback: "Flat 15% Cashback" },
+  ]
 
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.15 } }
-  }
-
-  const item = {
-    hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 60 } }
-  }
-
-  // har slider ke liye ek index rakhega (initial 0)
-  const [indexes, setIndexes] = useState(Array(allCarts.length).fill(0));
-
-  const handleNext = (sliderIndex, length) => {
-    setIndexes(prev => {
-      const newIndexes = [...prev];
-      if (newIndexes[sliderIndex] + 3 < length) {
-        newIndexes[sliderIndex] += 1;
-      }
-      return newIndexes;
-    });
-  };
-
-  const handlePrev = (sliderIndex) => {
-    setIndexes(prev => {
-      const newIndexes = [...prev];
-      if (newIndexes[sliderIndex] > 0) {
-        newIndexes[sliderIndex] -= 1;
-      }
-      return newIndexes;
-    });
-  };
+  // ✅ Carousel items
+  const images = banners.map((images, index) => (
+    <img
+      key={index}
+      src={images.images}
+      className="w-full max-w-xl sm:h-[18rem] sm:max-w-3xl h-[8rem] rounded-xl"
+    />
+  ))
 
   return (
-    <div className="relative p-8 min-h-screen flex flex-col items-start bg-gray-900 text-white overflow-hidden">
-      
-      {/* Soft floating orbs */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-48 h-48 bg-indigo-500 rounded-full blur-2xl opacity-15 animate-pulse"></div>
+    <div className="min-h-screen w-full p-2 bg-black/5">      
+          <div className="w-full">
+            <OnlineSlider/>
+          </div>
+        
 
-      {/* Multiple Sliders */}
-      {allCarts.slice(0 , viewaall).map((cart, idx) => (
-        <div key={idx} className="w-full mb-16">
-          <h1 className="text-3xl md:text-5xl font-bold text-violet-400 mb-8 drop-shadow-lg">
-            {cart.title}
-          </h1>
-          <div className="overflow-hidden w-full max-w-full relative">
-            <motion.div
-              className="flex gap-8"
-              animate={{ x: -indexes[idx] * 320 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
-              {cart.slider.map((item, index) => (
-                <div key={index} className="bg-gray-800/70 backdrop-blur-md border border-gray-700 rounded-2xl p-10 w-[300px] flex-shrink-0 hover:scale-105 transition-transform duration-300 shadow-lg">
-                  <h2 className="text-xl font-semibold text-violet-300">{item.title}</h2>
-                  <p className="text-sm text-gray-300 mt-2">{item.data}</p>
-                  <div className="mt-4 text-pink-400 font-medium">{item.offer}</div>
-                  <div className="mt-2 text-green-400 font-bold">{item.cashback}</div>
+      {/* Sites Section */}
+      <div className="w-full px-2 py-[-2rem]">
+        <h2 className="text-4xl font-extrabold mb-4">Our Best Trending Sites</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {sites.map((site, i) => (
+            
+            <div
+              key={i}
+              
+            > 
+            <div  className="rounded-xl shadow-md border  flex flex-col items-center hover:shadow-lg transition">
+              <div className="relative w-full h-[13rem] rounded-lg overflow-hidden">
+                <Image src={site.img} alt={site.name} fill className="object-cover" />
+                <div className="absolute top-2 left-2 bg-white text-xs px-2 py-1 rounded-md shadow">
+                  {site.cashback}
                 </div>
-              ))}
-            </motion.div>
-          </div>
-          {/* Prev & Next Buttons */}
-          <div className="flex justify-between w-full mt-4">
-            <button
-              className="px-6 py-2 rounded-full text-white font-semibold shadow-md bg-white/30"
-              onClick={() => handlePrev(idx)}
-            >
-              ←
-            </button>
-            <button
-              className="px-6 py-2 rounded-full text-white font-semibold shadow-md bg-white/30"
-              onClick={() => handleNext(idx, cart.slider.length)}
-            >
-              →
-            </button>
-          </div>
+              </div>
+              
 
-          
-
+              </div>
+              <p className=" w-full text-center font-semibold">{site.name}</p>
+            </div>
+          ))}
         </div>
-      ))}
-      <div className="flex justify-center w-full">
-            <button className="bg-white/30 h-10 rounded-full w-30" onClick={() => setviewall(viewaall + 2)}>View All</button>
+      </div>
+
+      {/* Cards Section */}
+      {getcards.slice(0, slice).map((cat, idx) => (
+        <div key={idx} className="w-full">
+          <div className="border-t p-2 mt-5 text-center w-full ml-2 border-black/10 max-w-[76rem]"></div>
+          <div className="w-full bg-white p-3 border-2 border-black/20 rounded-2xl mx-auto">
+            {/* Category Title */}
+            <div className="flex items-center mb-3">
+              <h2 className="text-3xl font-bold capitalize">{cat.name}</h2>
             </div>
 
-      {/* Categories Section */}
-      <motion.section
-        initial="hidden"
-        variants={container}
-        whileInView="show"
-        viewport={{ once: true }}
-        className="relative py-16 bg-gray-900 text-white overflow-hidden"
-      >
-        <div className="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-48 h-48 bg-indigo-500 rounded-full blur-2xl opacity-15 animate-pulse"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-5xl font-extrabold drop-shadow-sm mb-4">
-              ✨ Top Categories
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Explore our wide range of categories and grab the hottest deals!
-            </p>
+            {/* Products Scrollable Row */}
+          <div className="flex h-full gap-3 overflow-x-auto rounded-xl scrollbar-hide pb-2">
+  {cat.products.map((prod, index) => (
+    <div key={prod.id || index} className="flex items-stretch">
+      {/* Product Card */}
+      <div className="min-w-[18rem] flex flex-col rounded-xl hover:shadow-md bg-white flex-shrink-0 relative">
+        {/* Image Section */}
+        <div className="relative flex justify-center items-center rounded-2xl w-full h-50">
+          <img
+            src={prod.image || "/filipkaronline2.png"}
+            alt={prod.title}
+            className="w-full max-w-[17rem] border h-40 object-cover rounded-2xl"
+          />
+          {/* Discount / Cashback */}
+          {prod.discount && (
+            <span className="absolute top-2  bg-red-600 text-white text-xs px-2 py-1 rounded-lg">
+              {prod.discount}
+            </span>
+          )}
+          {prod.cashback && (
+            <span className="absolute bottom-9 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-lg">
+              upto 5% Cashback
+            </span>
+          )}
+          {/* Heart Icon */}
+          <div className="absolute top-2 cursor-pointer right-2">
+            <Heart
+              size={30}
+              className={
+                liked[prod.id]
+                  ? "fill-red-500 border-2 rounded-full p-1 bg-pink-300 text-red-500"
+                  : "text-gray-400 border-2 rounded-full bg-white p-1"
+              }
+              onClick={() =>
+                setLiked((prev) => ({ ...prev, [prod.id]: !prev[prod.id] }))
+              }
+            />
           </div>
-
-          <motion.div
-            variants={container}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5"
-          >
-            {categories.map((category, index) => (
-              <motion.div
-                key={index}
-                variants={item}
-                whileHover={{ rotateY: 8, rotateX: -8, scale: 1.05 }}
-                whileInView='show'
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 blur-md opacity-20 group-hover:opacity-40 transition"></div>
-
-                <Link href={category.path}>
-                  <div className="relative bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl p-5 text-center cursor-pointer shadow-lg overflow-hidden">
-                    <div className="relative z-10 text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                      {category.icon}
-                    </div>
-                    <h3 className="relative z-10 text-sm font-semibold text-gray-200 group-hover:text-pink-400 transition-colors">
-                      {category.name}
-                    </h3>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
-      </motion.section>
+
+        {/* Details Section */}
+        <div className="p-3 flex h-20 gap-5">
+          <h3 className="font-extrabold w-20 mt-[-1.6rem] text-3xl">
+            {prod.title}
+          </h3>
+          <div>
+            <div className="flex  mt-[-1rem] ml-25 text-lg text-gray-500">
+             {[1, 2, 3, 4, 5].map((star) => (
+  <div
+    key={star}
+    className="relative inline-block cursor-pointer"
+    onClick={(e) => {
+      const { left, width } = e.currentTarget.getBoundingClientRect()
+      const clickX = e.clientX - left
+      if (clickX < width / 2) {
+        setRating(star - 0.5) // half star
+      } else {
+        setRating(star) // full star
+      }
+    }}
+  >
+    <Star
+      className={`w-5 h-5 ${
+        rating >= star
+          ? "fill-yellow-400 text-yellow-400"
+          : rating >= star - 0.5
+          ? "text-yellow-400 relative before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1/2 before:bg-yellow-400"
+          : "text-gray-400"
+      }`}
+    />
+  </div>
+))}
+
+
+              <span className=" mt-[-5px] ml-2 text-[1rem]">2.2</span>
+              <span>{prod.reviews}</span>
+            </div>
+            <span className="text-end text-sm ml-25">32 Review</span>
+          </div>
+        </div>
+
+        {/* Offer Tags */}
+        <div className="mt-[-4rem] p-2">
+          <p className="text-sm text-gray-800">{prod.offer}</p>
+          <div className="w-full max-w-[15rem] border-t text-[10px]">
+  <ul className="flex gap-1 pt-1 pb-3">
+    <li className="bg-pink-300 px-2 py-0.5 text-[9px] rounded border">Ladies</li>
+    <li className="bg-blue-300 px-2 py-0.5 text-[9px] rounded border">Man</li>
+    <li className="bg-yellow-200 px-2 py-0.5 text-[9px] rounded border">Children</li>
+    <li className="bg-pink-200 px-2 py-0.5 text-[9px] rounded border">Ladies</li>
+    <li className="bg-pink-200 px-2 py-0.5 text-[9px] rounded border">Ladies</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+
+      {/* Separator Line (last card ke baad na ho) */}
+      {index !== cat.products.length - 1 && (
+        <div className="w-px ml-5 h-[16.5rem] mt-4 bg-gray-300 mx-1"></div>
+      )}
+    </div>
+  ))}
+
+
+              {/* Sideways Arrow */}
+              <div className="flex items-center h-10 justify-center">
+  <ChevronRight size={20} className="text-gray-600" />
+</div>
+
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* View More Button */}
+      <div className="w-full max-w-md mx-auto flex justify-center mt-4">
+        <button
+          onClick={handleView}
+          className="px-6 py-2 bg-black text-white rounded-full shadow-md hover:bg-gray-800 transition text-sm md:text-base"
+        >
+          View More +
+        </button>
+      </div>
     </div>
   )
 }

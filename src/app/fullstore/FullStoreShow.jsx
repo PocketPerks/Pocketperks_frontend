@@ -1,71 +1,178 @@
 'use client'
-import { Opacity } from '@mui/icons-material'
-import { Categories as Datafullstore } from './datastore'
-import {motion ,} from 'framer-motion'
+import { Categories } from './datastore'
+import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Menu, X , Heart , Plus , Star , MessageCircle} from 'lucide-react' // hamburger & close icon
 
 export default function FullStoreHere() {
+  const [getcards, setgetcards] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [showFilter, setShowFilter] = useState(false) // 👈 new state
+  const [rating , setrating] = useState(2)
+  const [liked, setLiked] = useState(false)
 
-    const itemvar= {
-        hidden:{},
-        show:{
-            transition:{staggerChildren:0.1}
-        }
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await axios.get("http://172.30.2.161:4000/api/ourStore/offline-deals", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setgetcards(res.data.cards || res.data || [])
+        console.log(res.data.message || "fetch successfully")
+      } catch (error) {
+        console.log("failed to fetch", error)
+      }
     }
+    fetchdata()
+  }, [])
 
-    const itemvarient = {
-        hidden:{ y:30 , Opacity:0 },
-        show:{ y:0 , Opacity:1 , transition:{type:'spring' , stiffness:60}}
+  const handleCategoryChange = (catId) => {
+    setSelectedCategory(catId === selectedCategory ? null : catId)
+  }
+
+  const itemvar = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.1 }
     }
+  }
+
+  const itemvarient = {
+    hidden: { y: 30, opacity: 0 },
+    show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 60 } }
+  }
+
+  const filteredDeals = selectedCategory
+    ? getcards.filter(cat => cat.category_id === selectedCategory)
+    : getcards
+
   return (
-    
-    <motion.div initial="hidden" whileInView='show' variants={itemvar} className="relative min-h-screen bg-gradient-to-b from-purple-900/80 via-indigo-900/70 to-blue-500/40 overflow-hidden">
-      <div className="absolute -top-20 left-10 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl animate-ping"></div>
-      <div className="absolute top-1/3 right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-2xl animate-pulse"></div>
-
-      <div className='relative z-10'>
+    <motion.div initial="hidden" whileInView='show' variants={itemvar} className="relative min-h-screen">
+      <div className='relative p-3 z-10'>
+        <div className='flex gap-[7rem]'>
         <img
           src='/storeimage.png'
           alt='image'
-          className='h-[33rem]  w-full object-cover'
+          className=' w-[15rem] h-[10rem]  object-cover'
         />
-        <div className="absolute inset-0 flex justify-center items-end">
-          <div className="bg-white rounded-t-full w-full max-w-6xl mx-auto py-3  shadow-lg flex justify-center">
-            <h1 className="text-xl font-bold text-black drop-shadow-lg">Shop</h1>
+        <div className='text-5xl mt-10 p-4 font-bold'>SHOP IN YOUR NEAREST STORE</div>
+         
+        </div>
+        <div className='flex'>
+          <button
+              className="md:hidden  h-10 top-5 left-5 z-50  text-black p-2 rounded-lg"
+              onClick={() => setShowFilter(!showFilter)}
+            >
+              {showFilter ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* ---------- Sidebar (Filters) ---------- */}
+            <div
+              className={`
+                absolute md:static  left-0 h-auto w-64 md:w-1/4
+                bg-white shadow-2xl p-6 rounded-r-2xl md:rounded-2xl 
+                transform transition-transform duration-300 z-40
+                ${showFilter ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+              `}
+            >
+              <h2 className="text-lg font-bold mb-4">Shop by Category</h2>
+              <ul className='flex flex-col gap-3'>
+                {getcards.map((cat) => (
+                  <li key={cat.category_id}>
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedCategory === cat.category_id}
+                        onChange={() => handleCategoryChange(cat.category_id)}
+                      />
+                      {cat.category_name}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+           
+
+        <div className="relative z-10 flex flex-col md:flex-row max-w-7xl mx-auto gap-6 px-4">
+
+          <motion.div variants={itemvar} className='flex gap-8 w-full'>
+
+            <div className="w-full h-auto max-w-8xl md:flex-1 mt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:gride-cols-5 gap-2 p-4">
+  {filteredDeals.flatMap(cat =>
+    cat.deals.map((deal) => (
+      <motion.div
+        key={deal.id}
+        whileHover={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className="bg-white shadow-lg hover:shadow-2xl rounded-2xl overflow-hidden flex flex-col w-[250px] h-[300px]"
+      >
+        {/* Image Section */}
+        <div className="p-5">
+  <div className="relative w-full h-40 bg-gray-200 flex items-center justify-center rounded-xl shadow-md">
+    
+    {/* ❤️ Heart Icon Top Right Corner */}
+    <div  onClick={() => setLiked(!liked)}
+     className="absolute top-2 right-2 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
+      <Heart
+        size={30}
+        className={liked ? "fill-red-500 text-red-500" : "text-gray-400"}
+      />
+    </div>
+
+    {/* Product Image */}
+    <img
+      src={deal.image_url}
+      alt="product"
+      className="h-32 object-contain"
+    />
+  </div>
+</div>
+
+
+        {/* Content Section */}
+        <div className="flex flex-col  p-2">
+          <div>
+          <h3 className="font-semibold h-10 flex text-gray-800 text-sm text-center mt-[-20px] line-clamp-2">
+            {deal.title}
+          </h3>
+          <p className='text-[10px] '>Carts</p>
           </div>
+
+          <div className="text-xs text-gray-500 flex   justify-between items-center">
+            <div className="flex  cursor-pointer">
+      {[1,2,3,4,5].map((star) => (
+        <Star
+          key={star}
+          onClick={() => setRating(star)}
+          className={`w-4 h-4 ${
+            star <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-400"
+          }`}
+        />
+      ))}
+    </div>
+            <div className='flex flex-col gap-3 mt-[-30px]'>
+          <div className="bg-black h-8 w-8 rounded-full flex items-center justify-center">
+  <Plus fill="red" size={16} className="text-white" />
+</div>
+
+           </div>
+          </div>
+
+          <div className='w-full border-t-1 p-[7.2px] border-black/30 bg-black/10 rounded-b-2xl text-center'>up to 20% cashback</div>
         </div>
-      </div>
-
-      <div className="relative z-10 flex flex-col md:flex-row max-w-7xl mx-auto  gap-6 px-4">
-
-        <div className='w-full  md:w-1/4 h-[20rem] mt-10 bg-white/20 backdrop-blur-lg p-6 rounded-2xl flex flex-col gap-4'>
-          <ul className='flex flex-col gap-3'>
-            <li><input type="checkbox" /> Option 1</li>
-            <li><input type="checkbox" /> Option 2</li>
-            <li><input type="checkbox" /> Option 3</li>
-            <li><input type="checkbox" /> Option 4</li>
-            <li><input type="checkbox" /> Option 5</li>
-          </ul>
+      </motion.div>
+    ))
+  )}
+</div>
+          </motion.div>
         </div>
 
-        <motion.div variants={itemvar}  className="w-full md:w-4/4 grid grid-cols-1 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {Datafullstore.map((item, index) => (
-            <motion.div variants={itemvarient}
-              whileHover={{ scale: 1.05, rotateY: 8 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 15 }} key={index} className='bg-white/20 backdrop-blur-xl p-4 rounded-2xl shadow-md flex flex-col items-center transition hover:scale-105'>
-              <img
-                src={item.Image}
-                alt='product'
-                className='w-full h-40 bg-black/30 p-2 object-contain mb-4 rounded-2xl'
-              />
-              <div className='font-semibold mb-3 text-center'>{item.Reward}</div>
-              <div className='flex gap-3 w-full justify-center'>
-                <button className='flex-1 bg-purple-500 text-white py-2 p-2 rounded-2xl hover:bg-purple-600 transition text-sm sm:text-[12px]'>Add to Cart</button>
-                <button className='flex-1 bg-gray-200 text-gray-800 py-2 rounded-2xl hover:bg-gray-300 transition text-sm sm:text-[12px]'>Wishlist</button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+         
+            </div>
 
       </div>
     </motion.div>

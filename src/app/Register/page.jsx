@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import axios from "axios"
 
 export default function Signup(){
     const [contact , setcontect] = useState('')
@@ -8,14 +9,40 @@ export default function Signup(){
     const [content , setcontent] = useState("Login or Signup")
     const [buttoncontent , setbuttoncontent] = useState('Signup')
     const [info , setinfo] = useState('Signup with Email or use OTP verification')
+    const [formdata , setformdata] = useState({
+      username:"",
+      email:"",
+      password:""
+    })
+    const [message , setmessage] = useState("")
+
+    const handlechanges = (e) => {
+      setformdata({...formdata , [e.target.name] : e.target.value})
+    }
+    
     
     const router = useRouter()
     
-    const handlesubmit = (e) => {
+    const handlesubmit = async(e) => {
       e.preventDefault()
-      if(show === 'Email'){
-        router.push("/Register/Verify") 
+      console.log(formdata)
+
+
+      try {
+        const res = await axios.post("http://localhost:4000/api/authRegister/register" ,{name: formdata.username,
+  email: formdata.email,
+  password: formdata.password}
+        )
+
+        router.push("/")
+        setmessage("user register successfully")
+
+        
+      } catch (error) {
+        setmessage("sign up faild")
+        
       }
+      
     }
 
     useEffect(() => {
@@ -47,14 +74,17 @@ export default function Signup(){
             <div className="text-xl font-bold mb-8">{info}</div>
           </div>
 
-          <form className="w-full sm:px-[1rem] px-[25px] ">
+          <form onSubmit={handlesubmit} className="w-full sm:px-[1rem] px-[25px] ">
             {/* Email Input */}
             <div className="relative mb-6 w-full">
               <input
                 type="text"
                 id="contact"
-                placeholder=" "
-                onChange={(e) => setcontect(e.target.value)}
+                placeholder=""
+                name="email"
+                value={formdata.email}
+                
+                onChange={(e) => {handlechanges(e); setcontect(e.target.value);}}
                 className="peer border border-gray-400 rounded-md text-white px-3 pt-5 pb-2  w-full focus:border-blue-500 focus:outline-none"
               />
               <label
@@ -76,6 +106,9 @@ export default function Signup(){
                     type="text"
                     id="username"
                     placeholder=" "
+                    name="username"
+                    onChange={handlechanges}
+                    value={formdata.username}
                     className="peer border text-white border-gray-400 rounded-md px-3 pt-5 pb-2 w-full focus:border-blue-500 focus:outline-none"
                   />
                   <label
@@ -93,6 +126,9 @@ export default function Signup(){
                   <input
                     type="password"
                     id="password"
+                    name="password"
+                    onChange={handlechanges}
+                    value={formdata.password}
                     placeholder=" "
                     className="peer border text-white border-gray-400 rounded-md px-3 pt-5 pb-2 w-full focus:border-blue-500 focus:outline-none"
                   />
@@ -111,11 +147,14 @@ export default function Signup(){
 
             {/* Email Signup Button */}
             <button 
-              onClick={handlesubmit} 
+            type="submit"
+              
               className="bg-orange-500 mt-5 w-full max-w-[30rem] h-10 rounded-xl hover:bg-orange-400 hover:scale-110"
             >
               {buttoncontent}
             </button>
+            {message && <p className="text-green-50">{message}</p>}
+
           </form>
 
           {/* OTP Verification Button */}
@@ -138,9 +177,7 @@ export default function Signup(){
           </div>
 
           {/* Google Login */}
-          <div>
-            <img src="google.jpeg" className="h-10 w-full ml-[1.8rem] mt-[30px] max-w-[40px] rounded-full "/>
-          </div>
+          
 
         </div>
       </div>

@@ -91,9 +91,9 @@ const HowItWorks = () => {
               
 
               {/* Card */}
-              <div className="bg-white/5 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-6 shadow-md hover:shadow-cyan-500/40 transition-shadow duration-300 h-full">
+              <div className="bg-white/5 backdrop-blur-md border border-black rounded-2xl p-6 shadow-xl hover:shadow-black/30 transition-shadow duration-300 h-full">
                 <div className="text-4xl mb-4">{step.icon}</div>
-                <h3 className="text-lg font-semibold text-cyan-400 mb-2">{step.title}</h3>
+                <h3 className="text-lg font-semibold text-black/30 mb-2">{step.title}</h3>
                 <p className="text-sm text-blue-400 font-medium mb-3">{step.subtitle}</p>
                 <p className="text-sm text-gray-300">{step.description}</p>
               </div>

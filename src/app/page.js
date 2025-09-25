@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import ImageCrousal from './components/ImageCrousal'
 
 // 👇 Heavy / neeche wale components ko dynamic import kar
 const BrandDealsRow = dynamic(() => import("./components/BrandDealsRow"), {
@@ -43,6 +44,7 @@ export default function Home() {
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div>
+        <ImageCrousal/>
         <BrandDealsRow />
         <Categories />
         <ProductGrid />
