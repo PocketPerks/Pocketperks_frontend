@@ -1,8 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import React from "react";
 import Navbar from "@/components/Navbar";
+import SliderBanner from "@/components/online/StoreBanner";
+import ProductCard from "@/components/online/ProductCard";
+import CarouselSection from "@/components/online/CarouselSection";
+import TrendingSitesSection from "@/components/online/TrendingSitesSection";
 
 export default function HomePage() {
   const slides = [
@@ -32,121 +34,184 @@ export default function HomePage() {
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setCurrentIndex((p) => (p + 1) % slides.length);
-    }, 4500);
-    return () => clearInterval(id);
-  }, [slides.length]);
-
-  const cards = [
+  const products = [
     {
-      id: 1,
-      img: "/slider/amazonp.jpg",
+      imgSrc: "/products/product1.jpg",
+      title: "FlipKart",
+      category: "Electronics & Gaming",
+      rating: 3.5,
+      reviews: 120,
+      cashbackText: "5% Cashback",
+      siteName: "FlipKart",
+      tags: [
+        { text: "Men", color: "bg-blue-100 text-blue-700" },
+        { text: "Gadgets", color: "bg-green-100 text-green-700" },
+      ],
+    },
+    {
+      imgSrc: "/products/product2.jpg",
       title: "Amazon",
-      subtitle: "50–65% Off",
-      category: "Shoes & Footwear",
-      reviews: 34,
-      href: "#",
+      category: "Makeup & Beauty",
+      rating: 5,
+      reviews: 89,
+      cashbackText: "10% Cashback",
+      siteName: "Amazon",
+      tags: [
+        { text: "Ladies", color: "bg-pink-100 text-pink-700" },
+        { text: "Skincare", color: "bg-yellow-100 text-yellow-700" },
+      ],
     },
     {
-      id: 2,
-      img: "/slider/flipkart.jpg",
-      title: "Flipkart",
-      subtitle: "Flat 40% Off",
-      category: "Clothing & Fashion",
-      reviews: 27,
-      href: "#",
+      imgSrc: "/products/product3.jpg",
+      title: "Adidas",
+      category: "Sports & Footwear",
+      rating: 1.5,
+      reviews: 45,
+      cashbackText: "7% Cashback",
+      siteName: "Adidas",
+      tags: [
+        { text: "Men", color: "bg-blue-100 text-blue-700" },
+        { text: "Sports", color: "bg-purple-100 text-purple-700" },
+      ],
+    },
+    // Additional cards to showcase arrow sliders
+    {
+      imgSrc: "/products/product2.jpg",
+      title: "Sony",
+      category: "Cameras & Photo",
+      rating: 4.5,
+      reviews: 231,
+      cashbackText: "6% Cashback",
+      siteName: "Sony",
+      tags: [
+        { text: "Pro", color: "bg-indigo-100 text-indigo-700" },
+        { text: "Photo", color: "bg-amber-100 text-amber-700" },
+      ],
     },
     {
-      id: 3,
-      img: "/slider/myntra.jpeg",
-      title: "Myntra",
-      subtitle: "Up to 70% Off",
-      category: "Top Brands",
-      reviews: 58,
-      href: "#",
+      imgSrc: "/products/product1.jpg",
+      title: "Canon",
+      category: "Lenses & Gear",
+      rating: 4.0,
+      reviews: 154,
+      cashbackText: "8% Cashback",
+      siteName: "Canon",
+      tags: [
+        { text: "DSLR", color: "bg-blue-100 text-blue-700" },
+        { text: "Gear", color: "bg-sky-100 text-sky-700" },
+      ],
+    },
+    {
+      imgSrc: "/products/product3.jpg",
+      title: "Levi's",
+      category: "Men's Wear",
+      rating: 3.0,
+      reviews: 72,
+      cashbackText: "5% Cashback",
+      siteName: "Levi's",
+      tags: [
+        { text: "Men", color: "bg-blue-100 text-blue-700" },
+        { text: "Jeans", color: "bg-gray-100 text-gray-700" },
+      ],
+    },
+  ];
+
+  const electronicsProducts = [
+    {
+      imgSrc: "/products/product1.jpg",
+      title: "HP",
+      category: "Laptops & PCs",
+      rating: 4.2,
+      reviews: 210,
+      cashbackText: "4% Cashback",
+      siteName: "HP",
+      tags: [
+        { text: "Work", color: "bg-blue-100 text-blue-700" },
+        { text: "Office", color: "bg-gray-100 text-gray-700" },
+      ],
+    },
+    {
+      imgSrc: "/products/product2.jpg",
+      title: "LG",
+      category: "Monitors & Displays",
+      rating: 4.6,
+      reviews: 300,
+      cashbackText: "7% Cashback",
+      siteName: "LG",
+      tags: [
+        { text: "4K", color: "bg-purple-100 text-purple-700" },
+        { text: "IPS", color: "bg-pink-100 text-pink-700" },
+      ],
+    },
+    {
+      imgSrc: "/products/product3.jpg",
+      title: "DJI",
+      category: "Drones & Action",
+      rating: 4.3,
+      reviews: 140,
+      cashbackText: "6% Cashback",
+      siteName: "DJI",
+      tags: [
+        { text: "Pro", color: "bg-indigo-100 text-indigo-700" },
+        { text: "Cam", color: "bg-amber-100 text-amber-700" },
+      ],
+    },
+    {
+      imgSrc: "/products/product2.jpg",
+      title: "Sony",
+      category: "Audio & Video",
+      rating: 4.7,
+      reviews: 420,
+      cashbackText: "5% Cashback",
+      siteName: "Sony",
+      tags: [
+        { text: "Audio", color: "bg-sky-100 text-sky-700" },
+        { text: "Video", color: "bg-rose-100 text-rose-700" },
+      ],
     },
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
+    <main className="min-h-screen flex flex-col bg-gray-50 text-black">
       <Navbar />
-      {/* Slider */}
-      <section className="relative max-w-full h-[28rem] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row m-4 md:m-6">
-        {/* Left: gradient + text */}
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-start px-6 md:px-12 py-8 md:py-0">
-          {slides.map((s, i) => (
-            <motion.div
-              key={i}
-              className="absolute inset-0"
-              animate={{ opacity: i === currentIndex ? 1 : 0 }}
-              transition={{ duration: 0.8 }}
-              style={{ background: s.gradient }}
-            />
-          ))}
+      <SliderBanner slides={slides} />
 
-          <div className="relative z-10 text-left max-w-md">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="text-3xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-                {slides[currentIndex].title}
-              </h1>
-              <p className="mt-4 text-lg md:text-2xl font-semibold text-white/90">
-                {slides[currentIndex].subtitle}
-              </p>
-              <p className="mt-1 text-sm md:text-lg text-white/85">
-                {slides[currentIndex].text}
-              </p>
+      <TrendingSitesSection
+        items={[
+          {
+            title: "Amazon",
+            bannerSrc: "/slider/amazonp.jpg",
+            badgeText: "Flat 10% Cashback",
+          },
+          {
+            title: "Flipkart",
+            bannerSrc: "/slider/flipkart.jpg",
+            badgeText: "Upto 12% Cashback",
+          },
+          {
+            title: "Myntra",
+            bannerSrc: "/slider/myntra.jpeg",
+            badgeText: "Flat 8% Cashback",
+          },
+        ]}
+      />
 
-              <button className="mt-6 md:mt-8 inline-block px-6 md:px-8 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition transform">
-                Explore Now
-              </button>
-            </motion.div>
-          </div>
-        </div>
+      <div className="w-full max-w-7xl mx-auto my-3 h-[3px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-90" />
 
-        {/* Right: image */}
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full">
-          {slides.map((s, i) => (
-            <motion.div
-              key={i}
-              className="absolute inset-0"
-              animate={{ opacity: i === currentIndex ? 1 : 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Image
-                src={s.src}
-                alt={s.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </motion.div>
-          ))}
-        </div>
+      <CarouselSection
+        title="Best deals on clothes"
+        items={products}
+        renderItem={(p) => <ProductCard {...p} />}
+      />
 
-        {/* indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`w-6 md:w-8 h-2.5 md:h-3.5 rounded-lg transition-transform ${
-                i === currentIndex ? "bg-white scale-125" : "bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Divider */}
+      <div className="w-full max-w-7xl mx-auto my-3 h-[3px] bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-90" />
+
+      <CarouselSection
+        title="Treading options for Electronics"
+        items={electronicsProducts}
+        renderItem={(p) => <ProductCard {...p} />}
+      />
     </main>
   );
 }
