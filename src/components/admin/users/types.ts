@@ -5,10 +5,10 @@ export interface User {
   name: string;
   email: string;
   phone?: string;
-  status: string; // allow arbitrary strings, but prefer Status
+  status: string; 
   role?: string;
-  joined?: string;   // yyyy-mm-dd
-  lastLogin?: string; // yyyy-mm-dd
+  joined?: string;   
+  lastLogin?: string; 
   cbEarned: number;
   avatar: string;
 }

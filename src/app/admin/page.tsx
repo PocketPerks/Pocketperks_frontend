@@ -1,10 +1,14 @@
 "use client";
 
-import { Settings, Building2, Users as UsersIcon, MessageSquareMore, FileChartColumnIncreasing } from "lucide-react";
+import {
+  Building2,
+  Users as UsersIcon,
+  MessageSquareMore,
+  FileChartColumnIncreasing,
+} from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer"; 
-import Finance from "@/components/admin/FinanceCompany";
+import Finance from "@/components/admin/Finance";
 import Company from "@/components/admin/Company";
 import Chat from "@/components/admin/Chat";
 import { IoColorPaletteOutline } from "react-icons/io5";
