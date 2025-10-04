@@ -35,7 +35,7 @@ export default function ReviewSubmitSection({ onSubmit }: { onSubmit?: (data: Re
     <div className="mx-auto max-w-3xl">
       <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onFileChange} />
 
-      {/* Header: PFP + Stars */}
+      {/* Header */}
       <div className="flex flex-col items-center mb-3">
         <Image src="/logos/pfp.jpg" alt="Profile" width={96} height={96} className="w-24 h-24 rounded-full border border-gray-300 object-cover" />
         <div className="mt-2 flex items-center gap-2" aria-label="Rating" role="radiogroup">
@@ -70,7 +70,7 @@ export default function ReviewSubmitSection({ onSubmit }: { onSubmit?: (data: Re
       </div>
 
       <div className="flex items-start gap-6">
-        {/* Review input */}
+        {/* Input */}
         <div className="flex-1">
           <textarea
             aria-label="Leave your review"
@@ -81,7 +81,7 @@ export default function ReviewSubmitSection({ onSubmit }: { onSubmit?: (data: Re
           />
         </div>
 
-        {/* Image upload / preview */}
+        {/* Upload */}
         <button
           type="button"
           onClick={onPaperclipClick}

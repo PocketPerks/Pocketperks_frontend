@@ -1,7 +1,6 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ImagePreview from "@/components/product/ImagePreview";
 import Description from "@/components/product/Description";
 import Offers from "@/components/product/Offers";
@@ -60,7 +59,6 @@ export default function ProductPage() {
           <Terms />
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

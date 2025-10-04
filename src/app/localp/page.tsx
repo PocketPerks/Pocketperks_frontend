@@ -9,6 +9,8 @@ import { reviews } from "@/components/localp/data/reviews";
 
 export default function LocalPPage() {
   const [visibleCount, setVisibleCount] = useState(2);
+  const total = reviews.length;
+  const hasMore = visibleCount < total;
   const ratingBreakdown = [
     { label: "5 star", pct: 60 },
     { label: "4 star", pct: 21 },
@@ -22,27 +24,27 @@ export default function LocalPPage() {
       <Navbar />
 
       <section className="w-full mx-auto px-6 py-8 bg-white rounded-3xl shadow border border-gray-200 my-4 md:my-6 lg:my-8 max-w-[calc(100%-2rem)] md:max-w-[calc(100%-3rem)] lg:max-w-[calc(100%-4rem)]">
-        {/* Review submit section (includes avatar + stars) */}
+        {/* Submit */}
         <ReviewSubmitSection />
         {/* Divider */}
         <div className="my-8 h-px bg-gray-200" />
-        {/* Customer reviews + cards */}
+        {/* Reviews */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          {/* Left: summary graph */}
+          {/* Summary */}
           <ReviewSummary average={4.2} total={984} breakdown={ratingBreakdown} />
 
-          {/* Middle: first review card */}
+          {/* Card 1 */}
           <div className="space-y-6">
             {reviews[0] && <ReviewCard {...reviews[0]} />}
           </div>
 
-          {/* Right: second review card */}
+          {/* Card 2 */}
           <div className="space-y-6">
             {reviews[1] && <ReviewCard {...reviews[1]} />}
           </div>
         </div>
 
-        {/* Additional reviews that load below */}
+        {/* More */}
         {visibleCount > 2 && (
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {reviews.slice(2, visibleCount).map((r, idx) => (
@@ -51,17 +53,17 @@ export default function LocalPPage() {
           </div>
         )}
 
-        {/* Load more */}
-        {visibleCount < reviews.length && (
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={() => setVisibleCount((n) => Math.min(reviews.length, n + 3))}
-              className="px-6 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 shadow"
-            >
-              Load More
-            </button>
-          </div>
-        )}
+        {/* Button */}
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setVisibleCount((n) => Math.min(total, n + 3))}
+            disabled={!hasMore}
+            className={`px-6 py-3 rounded-xl border shadow ${hasMore ? 'border-gray-300 bg-white hover:bg-gray-50' : 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+            aria-disabled={!hasMore}
+          >
+            {hasMore ? 'Load More' : 'No more reviews'}
+          </button>
+        </div>
       </section>
     </main>
   );
