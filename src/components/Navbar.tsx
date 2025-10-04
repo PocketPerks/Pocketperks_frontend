@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Home, ShoppingBag, User, ShoppingCart, Shield, Menu, X } from "lucide-react";
+import { Home, ShoppingBag, User, ShoppingCart, Shield, Menu, X, MapPin } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,6 +62,13 @@ className={`flex items-center gap-2 py-2 px-6 md:py-0 md:px-0 rounded focus:outl
             onClick={() => setIsMenuOpen(false)}
           >
             <ShoppingBag className="w-5 h-5" /> Online
+          </a>
+          <a
+            href="/localp"
+className={`flex items-center gap-2 py-2 px-6 md:py-0 md:px-0 rounded focus:outline-none focus:ring-2 focus:ring-black/30 transition-colors duration-200 hover:text-black hover:bg-transparent ${isActive("/localp") ? "text-black font-semibold" : "text-gray-700"}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <MapPin className="w-5 h-5" /> LocalP
           </a>
           <a
             href="/profile"

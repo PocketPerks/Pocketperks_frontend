@@ -1,16 +1,16 @@
 "use client";
 
-import { DollarSign, Settings, Building2, Users } from "lucide-react";
+import { DollarSign, Settings, MessageSquareMore, Users } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Earnings from "@/components/profile/Earnings";
-import Company from "@/components/admin/Company";
+import Chat from "@/components/profile/Chat";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("Account");
   const tabs = [
     { label: "Account", icon: Users },
+    { label: "Chat", icon: MessageSquareMore },
     { label: "Earnings", icon: DollarSign },
     { label: "Settings", icon: Settings },
   ];
@@ -21,7 +21,7 @@ export default function ProfilePage() {
 
       <div className="flex flex-1 p-6 gap-6">
         {/* Sidebar */}
-        <aside className="w-64 bg-white rounded-2xl shadow p-4 space-y-2 sticky top-16 h-[calc(100vh-4rem)]">
+        <aside className="w-64 bg-white rounded-2xl shadow p-4 space-y-2 sticky top-16 h-100vh">
           {tabs.map(({ label, icon: Icon }) => (
             <button
               key={label}
@@ -43,12 +43,10 @@ export default function ProfilePage() {
         <section className="flex-1 bg-white rounded-2xl shadow overflow-y-auto ">
           {activeTab === "Earnings" && <Earnings />}
           {activeTab === "Settings" && <Settings />}
-          {activeTab === "Company" && <Company />}
+          {activeTab === "Chat" && <Chat />}
           {activeTab === "Users" && <Users />}
         </section>
       </div>
-
-      <Footer />
     </main>
   );
 }

@@ -8,15 +8,21 @@ export function Footer({ joined, lastLogin, onEdit, onView, onSuspend }: { joine
     <div className="mt-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs text-gray-600 mb-2">
         {joined && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4" />
-            <span>Joined {joined}</span>
+            <div className="flex flex-col leading-tight text-center">
+              <span className="text-[11px] text-gray-500">Joined</span>
+              <span className="text-xs">{joined}</span>
+            </div>
           </div>
         )}
         {lastLogin && (
-          <div className="flex items-center gap-1 sm:justify-end">
+          <div className="flex items-center gap-2 sm:justify-end">
             <Clock className="w-4 h-4" />
-            <span>Last login {lastLogin}</span>
+            <div className="flex flex-col leading-tight text-center">
+              <span className="text-[11px] text-gray-500">Last login</span>
+              <span className="text-xs">{lastLogin}</span>
+            </div>
           </div>
         )}
       </div>
