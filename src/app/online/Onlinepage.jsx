@@ -2,17 +2,17 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { ChevronRight, Heart, Star } from "lucide-react"
-import AliceCarousel from "react-alice-carousel"
 import "react-alice-carousel/lib/alice-carousel.css"
 import Image from "next/image"
 import OnlineSlider from "./OnlineSlider"
+import OnlineHeart from './OnlineHeart'
+import Link from "next/link"
 
 export default function Onlinepage() {
   const [getcards, setgetcards] = useState([])
   const [slice, setslice] = useState(6)
-  const [rating, setRating] = useState(2)
-  const [liked, setLiked] = useState({})
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [ratings, setRatings] = useState({})
+
 
   const handleView = () => {
     setslice((prev) => prev + 4)
@@ -33,29 +33,7 @@ export default function Onlinepage() {
   }, [])
 
   // ✅ Banner images
-  const banners = [
-    {
-      images: "/Electronic.jpg",
-      title: "Amazon",
-      description: "Great Indian fest",
-      offer: "min 30% off",
-      product: "skin care",
-    },
-    {
-      images: "/flipkart.jpg",
-      title: "Flipkart",
-      description: "Great Indian fest",
-      offer: "min 30% off",
-      product: "skin care",
-    },
-    {
-      images: "/Cloth.jpg",
-      title: "Clothes",
-      description: "Great Indian fest",
-      offer: "min 30% off",
-      product: "skin care",
-    },
-  ]
+  
 
   const sites = [
     { name: "Amazon", img: "/filipkaronline2.png", cashback: "Flat 10% Cashback" },
@@ -64,13 +42,8 @@ export default function Onlinepage() {
   ]
 
   // ✅ Carousel items
-  const images = banners.map((images, index) => (
-    <img
-      key={index}
-      src={images.images}
-      className="w-full max-w-xl sm:h-[18rem] sm:max-w-3xl h-[8rem] rounded-xl"
-    />
-  ))
+ 
+  
 
   return (
     <div className="min-h-screen w-full p-2 bg-black/5">      
@@ -82,7 +55,7 @@ export default function Onlinepage() {
       {/* Sites Section */}
       <div className="w-full px-2 py-[-2rem]">
         <h2 className="text-4xl font-extrabold mb-4">Our Best Trending Sites</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 p-6 md:grid-cols-3 gap-6">
           {sites.map((site, i) => (
             
             <div
@@ -90,16 +63,16 @@ export default function Onlinepage() {
               
             > 
             <div  className="rounded-xl shadow-md border  flex flex-col items-center hover:shadow-lg transition">
-              <div className="relative w-full h-[13rem] rounded-lg overflow-hidden">
-                <Image src={site.img} alt={site.name} fill className="object-cover" />
-                <div className="absolute top-2 left-2 bg-white text-xs px-2 py-1 rounded-md shadow">
-                  {site.cashback}
-                </div>
+              <div className="relative w-full h-[15rem] rounded-lg ">
+                <Image src={site.img} alt={site.name} fill className="object-cover rounded-xl" />
+                  <div className="absolute top-[-10px] p-4  left-30 bg-white text-sm  w-full max-w-[10rem] py-2 rounded-md shadow">
+                    <p className="w-full text-center font-bold">{site.cashback}</p>
+                  </div>
               </div>
               
 
               </div>
-              <p className=" w-full text-center font-semibold">{site.name}</p>
+              <p className=" w-full text-center text-2xl  font-bold">{site.name}</p>
             </div>
           ))}
         </div>
@@ -108,25 +81,27 @@ export default function Onlinepage() {
       {/* Cards Section */}
       {getcards.slice(0, slice).map((cat, idx) => (
         <div key={idx} className="w-full">
-          <div className="border-t p-2 mt-5 text-center w-full ml-2 border-black/10 max-w-[76rem]"></div>
+          <div className="border-t p-2 mt-5 text-center w-full  border-black/10 max-w-[76rem]"></div>
           <div className="w-full bg-white p-3 border-2 border-black/20 rounded-2xl mx-auto">
             {/* Category Title */}
             <div className="flex items-center mb-3">
-              <h2 className="text-3xl font-bold capitalize">{cat.name}</h2>
+              <h2 className="text-4xl font-extrabold capitalize">{cat.name}</h2>
             </div>
 
             {/* Products Scrollable Row */}
           <div className="flex h-full gap-3 overflow-x-auto rounded-xl scrollbar-hide pb-2">
   {cat.products.map((prod, index) => (
     <div key={prod.id || index} className="flex items-stretch">
+      
       {/* Product Card */}
-      <div className="min-w-[18rem] flex flex-col rounded-xl hover:shadow-md bg-white flex-shrink-0 relative">
+      <div className="min-w-[17rem] flex flex-col rounded-xl hover:shadow-md bg-white flex-shrink-0 relative">
         {/* Image Section */}
-        <div className="relative flex justify-center items-center rounded-2xl w-full h-50">
+        <Link href="/ProductPage">
+        <div className="relative flex justify-center ml-3 items-center rounded-2xl w-full min-w-[15rem] h-50">
           <img
             src={prod.image || "/filipkaronline2.png"}
             alt={prod.title}
-            className="w-full max-w-[17rem] border h-40 object-cover rounded-2xl"
+            className="w-full max-w-[17rem] border-2  h-40 object-cover rounded-2xl"
           />
           {/* Discount / Cashback */}
           {prod.discount && (
@@ -135,64 +110,56 @@ export default function Onlinepage() {
             </span>
           )}
           {prod.cashback && (
-            <span className="absolute bottom-9 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-lg">
+            <span className="absolute bottom-9 left-2 bg-red-500 text-white text-sm px-2 py-1 rounded-lg">
               upto 5% Cashback
             </span>
           )}
           {/* Heart Icon */}
-          <div className="absolute top-2 cursor-pointer right-2">
-            <Heart
-              size={30}
-              className={
-                liked[prod.id]
-                  ? "fill-red-500 border-2 rounded-full p-1 bg-pink-300 text-red-500"
-                  : "text-gray-400 border-2 rounded-full bg-white p-1"
-              }
-              onClick={() =>
-                setLiked((prev) => ({ ...prev, [prod.id]: !prev[prod.id] }))
-              }
-            />
-          </div>
+       <OnlineHeart/>
         </div>
+        </Link>
 
         {/* Details Section */}
         <div className="p-3 flex h-20 gap-5">
-          <h3 className="font-extrabold w-20 mt-[-1.6rem] text-3xl">
+          <h3 className="font-bold w-20 mt-[-1.6rem] text-3xl">
             {prod.title}
           </h3>
           <div>
-            <div className="flex  mt-[-1rem] ml-25 text-lg text-gray-500">
-             {[1, 2, 3, 4, 5].map((star) => (
-  <div
-    key={star}
-    className="relative inline-block cursor-pointer"
-    onClick={(e) => {
-      const { left, width } = e.currentTarget.getBoundingClientRect()
-      const clickX = e.clientX - left
-      if (clickX < width / 2) {
-        setRating(star - 0.5) // half star
-      } else {
-        setRating(star) // full star
-      }
-    }}
-  >
-    <Star
-      className={`w-5 h-5 ${
-        rating >= star
-          ? "fill-yellow-400 text-yellow-400"
-          : rating >= star - 0.5
-          ? "text-yellow-400 relative before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1/2 before:bg-yellow-400"
-          : "text-gray-400"
-      }`}
-    />
-  </div>
-))}
+          <div className="flex mt-[-1.7rem] ml-15 text-lg text-gray-500">
+  {[1, 2, 3, 4, 5].map((star) => (
+    <div
+      key={star}
+      className="relative inline-block"
+    >
+      {/* Base Empty Star (Gray) */}
+      <Star className="w-5 h-5 text-gray-300" />
+
+      {/* Full Yellow Star Overlay */}
+      {ratings[prod.id] >= star && (
+        <Star className="w-4 h-4 text-yellow-400 absolute left-0 top-0 fill-yellow-400" />
+      )}
+
+      {/* Half Yellow Star Overlay */}
+      {ratings[prod.id] === star - 0.5 && (
+        <div className="absolute left-0 top-0 w-1/2 h-full overflow-hidden">
+          <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+        </div>
+      )}
+    </div>
+  ))}
 
 
-              <span className=" mt-[-5px] ml-2 text-[1rem]">2.2</span>
+
+
+
+
+
+
+              <span className="mt-[-5px] ml-2 text-[1rem]">
+  {ratings[prod.id] ? ratings[prod.id].toFixed(1) : "0.0"}
+</span>
               <span>{prod.reviews}</span>
             </div>
-            <span className="text-end text-sm ml-25">32 Review</span>
           </div>
         </div>
 
@@ -214,7 +181,7 @@ export default function Onlinepage() {
 
       {/* Separator Line (last card ke baad na ho) */}
       {index !== cat.products.length - 1 && (
-        <div className="w-px ml-5 h-[16.5rem] mt-4 bg-gray-300 mx-1"></div>
+        <div className="w-px h-[16.5rem] mt-4 ml-3 bg-gray-300 mx-1"></div>
       )}
     </div>
   ))}

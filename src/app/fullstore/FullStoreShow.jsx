@@ -3,7 +3,8 @@ import { Categories } from './datastore'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Menu, X , Heart , Plus , Star , MessageCircle} from 'lucide-react' // hamburger & close icon
+import { Menu, X , Heart , Plus , Star , MessageCircle} from 'lucide-react'
+import Link from 'next/link' // hamburger & close icon
 
 export default function FullStoreHere() {
   const [getcards, setgetcards] = useState([])
@@ -110,6 +111,7 @@ export default function FullStoreHere() {
         transition={{ type: "spring", stiffness: 200 }}
         className="bg-white shadow-lg hover:shadow-2xl rounded-2xl overflow-hidden flex flex-col w-[250px] h-[300px]"
       >
+        <Link href="/fullstore/OurStore">
         {/* Image Section */}
         <div className="p-5">
   <div className="relative w-full h-40 bg-gray-200 flex items-center justify-center rounded-xl shadow-md">
@@ -124,11 +126,13 @@ export default function FullStoreHere() {
     </div>
 
     {/* Product Image */}
+   
     <img
       src={deal.image_url}
       alt="product"
       className="h-32 object-contain"
     />
+    
   </div>
 </div>
 
@@ -164,6 +168,7 @@ export default function FullStoreHere() {
 
           <div className='w-full border-t-1 p-[7.2px] border-black/30 bg-black/10 rounded-b-2xl text-center'>up to 20% cashback</div>
         </div>
+        </Link>
       </motion.div>
     ))
   )}
