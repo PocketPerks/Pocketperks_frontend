@@ -17,9 +17,9 @@ export default function ProductGrid() {
   ];
 
   return (
-    <div className="h-auto py-2  flex flex-col  items-center p-10 px-2">
+    <div className="h-auto py-2 w-full  flex flex-col  items-center p-10 px-2">
       {/* Product Grid */}
-      <div className="grid p-3 grid-cols-1 rounded-2xl p-10 bg-white sm:grid-cols-2 md:grid-cols-3 gap-6 w-full ">
+      <div className="grid p-3 grid-cols-1 rounded-2xl  bg-white sm:grid-cols-2 md:grid-cols-3 gap-6 w-full ">
         {products.slice(0, visible).map((product) => (
           <div
             key={product.id}

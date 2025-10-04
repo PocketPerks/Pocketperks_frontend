@@ -32,7 +32,7 @@ export default function ReviewSubmitSection({ onSubmit }: { onSubmit?: (data: Re
   };
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="mx-auto w-full">
       <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onFileChange} />
 
       {/* Header: PFP + Stars */}

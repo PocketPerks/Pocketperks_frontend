@@ -51,7 +51,7 @@ export default function ReviewCard({
   };
 
   return (
-<div className="rounded-2xl border border-gray-200 bg-white shadow p-6 transition hover:shadow-md">
+<div className="rounded-2xl p-3 border border-gray-200 bg-white shadow transition hover:shadow-md">
       <div className="flex items-start justify-between">
 <div className="flex items-center gap-3">
 {avatarUrl ? (

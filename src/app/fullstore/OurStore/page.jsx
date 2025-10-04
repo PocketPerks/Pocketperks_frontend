@@ -7,12 +7,12 @@ import OurStroeLower from  './OurStoreLower'
 export default function StorePage() {
   return (
     <>
-    <div className="bg-black/10 ">
+    
     <Navbar/>
     <OurStoreUpper/>
     <OurStoreMidd/>
     <OurStroeLower/>
-    </div>
+    
     </>
     
   

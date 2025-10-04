@@ -17,13 +17,15 @@ export default function LocalPPage() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-gray-200 text-black">
+    <main className="min-h-screen flex flex-col w-full bg-gray-200 text-black px-4 md:px-6 lg:px-8">
 
-      <section className="w-full mx-auto px-6 py-8 bg-white rounded-3xl shadow border border-gray-200 my-4 md:my-6 lg:my-8 max-w-[calc(100%-2rem)] md:max-w-[calc(100%-3rem)] lg:max-w-[calc(100%-4rem)]">
-        {/* Review submit section (includes avatar + stars) */}
+      <section className="w-full mx-auto bg-white rounded-3xl shadow border border-gray-200 my-6 p-6 md:p-8 lg:p-10 max-w-[1200px]">
+        {/* Review submit section */}
         <ReviewSubmitSection />
+
         {/* Divider */}
         <div className="my-8 h-px bg-gray-200" />
+
         {/* Customer reviews + cards */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Left: summary graph */}
