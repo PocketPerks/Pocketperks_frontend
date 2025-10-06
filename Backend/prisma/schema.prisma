@@ -1,0 +1,177 @@
+
+//gotta make cash back period for companies also.
+//offline store will also provide cashback peried.
+//save gradient colours poster in db, and company poster baner, so in admin section they upload the banner and choose the poster colour.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model categories {
+  id            Int     @id @default(autoincrement())
+  category_name String  @db.VarChar(100)
+  description   String?
+  image_url     String?
+
+  // Relations
+  brands        categoriesOnBrands[]
+  offlineBrands categoriesOnOfflineBrands[]
+  deals         deals[]
+}
+
+model brands {
+  id              Int                 @id @default(autoincrement())
+  brand_name      String              @db.VarChar(100)
+  logo_url        String?
+  description     String?
+  is_featured     Boolean             @default(false)
+  offer_highlight String?
+  rating          Float               @default(0.0)
+  ratingsCount    Int                 @default(0)
+  cashback        String?             @db.VarChar(50)
+  cashback_type   String?             @db.VarChar(50)
+  is_sale         Boolean             @default(false)
+  offerLink       String?             @db.VarChar(255)
+
+  // Relations
+  carousel_images carousel_images[]
+  rewards_info    rewards_info[]
+  categories      categoriesOnBrands[]
+  deals           deals[]
+}
+
+model categoriesOnBrands {
+  brand_id    Int
+  category_id Int
+
+  brand    brands     @relation(fields: [brand_id], references: [id])
+  category categories @relation(fields: [category_id], references: [id])
+
+  @@id([brand_id, category_id])
+}
+
+model offlineBrands {
+  id              Int                        @id @default(autoincrement())
+  brand_name      String                     @db.VarChar(100)
+  logo_url        String?
+  description     String?
+  is_featured     Boolean                    @default(false)
+  offer_highlight String?
+  rating          Float                      @default(0.0)
+  ratingsCount    Int                        @default(0)
+  cashback        String?                    @db.VarChar(50)
+  cashback_type   String?                    @db.VarChar(50)
+  is_sale         Boolean                    @default(false)
+  offerLink       String?                    @db.VarChar(255)
+
+  // Relations
+  categories categoriesOnOfflineBrands[]
+  deals      deals[]
+}
+
+model categoriesOnOfflineBrands {
+  offline_brand_id Int
+  category_id      Int
+
+  offlineBrand offlineBrands @relation(fields: [offline_brand_id], references: [id])
+  category     categories    @relation(fields: [category_id], references: [id])
+
+  @@id([offline_brand_id, category_id])
+}
+
+model deals {
+  id               Int     @id @default(autoincrement())
+  deal_title       String  @db.VarChar(150)
+  brand_id         Int?
+  offline_brand_id Int?    
+  category_id      Int
+  discount_percent Float?
+  cashback_amount  Float?
+  link             String?
+  image_url        String?
+  is_featured      Boolean @default(false)
+
+  // Relations
+  brand        brands?        @relation(fields: [brand_id], references: [id])
+  offlineBrand offlineBrands? @relation(fields: [offline_brand_id], references: [id])
+  category     categories     @relation(fields: [category_id], references: [id])
+}
+
+model credit_cards {
+  id               Int     @id @default(autoincrement())
+  bank_name        String  @db.VarChar(100)
+  card_name        String  @db.VarChar(100)
+  cashback_percent Float?
+  cashback_amount  Float?
+  joining_offer    String?
+  benefits         String?
+  link             String?
+  image_url        String?
+  is_featured      Boolean @default(false)
+}
+
+model carousel_images {
+  id        Int    @id @default(autoincrement())
+  brand_id  Int
+  image_url String
+
+  brand brands @relation(fields: [brand_id], references: [id])
+}
+
+model rewards_info {
+  id               Int    @id @default(autoincrement())
+  brand_id         Int
+  rewards_track_in String?
+  reward_used      String?
+  vouchers_taken   Int    @default(0)
+
+  brand brands @relation(fields: [brand_id], references: [id])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String   @db.Text
+  sessions  UserSession[] // 🔗 Relation: One user can have many sessions
+  createdAt DateTime @default(now())
+} 
+
+model UserSession {
+  id        Int      @id @default(autoincrement())
+  sessionId String   @unique
+  pages     String[] // stores array of page names
+  refButton String
+  meta      Json
+  timestamp DateTime @default(now())
+
+  // 🔗 Relation to User
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model RedeemCode {
+  id      Int     @id @default(autoincrement())
+  code    String  @unique
+  used    Boolean @default(false)
+  userId  Int?
+}
+
+//banner
+model Banner {
+  id             Int      @id @default(autoincrement())
+  brandName      String
+  title          String
+  percentageOff  Int      @default(0)
+  gradientType   String
+  categories     Json     // stores JSON array
+  filename       String
+  mimetype       String
+  banner         Bytes    // binary image data
+  createdAt      DateTime @default(now())
+}
