@@ -4,24 +4,24 @@ import { PrismaClient } from "@prisma/client";
 const router = e();
 const prisma = new PrismaClient();
 
-//get all ofline brands
-// router.get("/offline-stores", async (req, res) => {
-//   try {
-//     const stores = await prisma.offlineBrands.findMany({
-//       include: {
-//         id: true,
-//         brand_name: true,
-//         logo_url: true,
-//         offer_highlight: true,
-//       }
-//     })
+// Get all offline brands
+router.get("/offline-stores", async (req, res) => {
+  try {
+    const stores = await prisma.offlineBrands.findMany({
+      select: {
+        id: true,
+        brand_name: true,
+        logo_url: true,
+        offer_highlight: true,
+      },
+    });
 
-//     res.json(stores);
-//   } catch (error) {
-//     console.error("Error fetching offline deals:", error);
-//     res.status(500).json({ error: "Failed to fetch offline stores" });
-//   }
-// })
+    res.json(stores);
+  } catch (error) {
+    console.error("Error fetching offline stores:", error);
+    res.status(500).json({ error: "Failed to fetch offline stores" });
+  }
+});
 
 // GET offline deals grouped by category
 
