@@ -19,7 +19,7 @@ interface CompanyCardProps {
   offerLink?: string;
   categories?: Category[];
   rating?: number;
-  status?: "Active" | "Inactive"; // optional UI field
+  status?: "Active" | "Inactive"; 
 }
 
 export default function CompanyCard({
